@@ -188,7 +188,7 @@ Specialization: Computer Science}
     \vspace*{\beforeTitle}
     \fontsize{26}{28}\selectfont\@titleRO \par%
     \vspace*{\afterTitle}
-    \pgfimage[width=7.5cm]{illustrations/imgs/logo-UBB}
+    \pgfimage[width=7.5cm]{img/logo-UBB}
     \end{center}
     \vfill
     {\fontsize{16}{18}\selectfont\scshape\noindent%
@@ -226,7 +226,7 @@ Specialization: Computer Science}
     \vspace*{\beforeTitle}
     \fontsize{26}{28}\selectfont\@titleHU \par%
     \vspace*{\afterTitle}
-    \pgfimage[width=7.5cm]{illustrations/imgs/logo-UBB}
+    \pgfimage[width=7.5cm]{img/logo-UBB}
     \end{center}
     \vfill
     {\fontsize{16}{18}\selectfont\scshape\noindent%
