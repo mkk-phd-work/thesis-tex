@@ -1,0 +1,46 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{loabbreviation}[2024/09/25 Managing abbreviations]
+%
+%
+\def\loabbreviationsname{List of Abbreviations}
+\def\listofabbreviations{\@ifundefined{chapter}{%
+		\section*{\loabbreviationsname \@mkboth
+		{\uppercase{\loabbreviationsname}}{\uppercase{\loabbreviationsname}}}
+	}{%
+		\chapter*{\loabbreviationsname \@mkboth
+		{\uppercase{\loabbreviationsname}}{\uppercase{\loabbreviationsname}}}
+	}
+    \@starttoc{loabbr}
+}
+%
+%
+\def\addabbrgroup#1{%
+\addtocontents{loabbr}{\protect \large\textbf{#1}\normalsize\newline}}
+\def\addabbr#1#2{%
+\addtocontents{loabbr}{\protect \makeniceabbreviationline{#1}{#2}}}
+\newcommand\addabbreviation\addabbr
+\newcommand\addabbreviationgroup\addabbrgroup
+%
+%physical dimensions of columns
+%
+\newdimen\@lcabbr %width of left column
+\@lcabbr=3cm      %default 3cm
+%
+\newdimen\@mcabbr %width of mid column (space)
+\@mcabbr=2cm      %default 2cm
+%
+\newdimen\@rcabbr %width of right column
+\@rcabbr=\textwidth   %initial width=textwidth
+%
+\advance\@rcabbr by -\@lcabbr %subtract lcsym
+\advance\@rcabbr by -\@mcabbr %subtract mid
+%
+%command for producing the actual line uses standard minipages
+%to cope with long definitions
+%
+\def\makeniceabbreviationline#1#2{%
+\begin{minipage}[t]{\@lcabbr}#1\end{minipage}%
+$\hspace{\@mcabbr}$%
+\begin{minipage}[t]{\@rcabbr}#2\end{minipage}\newline}
+%
+%end of loabbreviationsname.sty
