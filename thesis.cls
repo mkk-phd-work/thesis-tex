@@ -149,7 +149,7 @@ Specialization: Computer Science}
     \vspace*{\beforeTitle}
     \fontsize{24}{26}\selectfont\@titleEN \par%
     \vspace*{\afterTitle}
-    \pgfimage[width=6cm]{illustrations/imgs/logo-UBB}
+    \pgfimage[width=6cm]{img/logo-UBB}
     \end{center}
     \vfill
     {\fontsize{16}{18}\selectfont\scshape\noindent%
@@ -260,7 +260,7 @@ Specialization: Computer Science}
     \thispagestyle{empty}
     \vspace*{.2in}
     \noindent I hereby declare that I am the sole author of this thesis.\\ \\
-    \noindent I authorize Princeton University to lend this thesis to other
+    \noindent I authorize XY University to lend this thesis to other
     institutions or individuals for the purpose of scholarly research.\vspace*{.5in}\\ \\
     \hspace*{3.5in}
     \makebox[2.0in]{\hrulefill} \\
@@ -268,7 +268,7 @@ Specialization: Computer Science}
     \@author
 
     \vspace*{0.8in}
-    \noindent I further authorize Princeton University to reproduce this thesis by photocopying or by
+    \noindent I further authorize XY University to reproduce this thesis by photocopying or by
     other means, in total or in part, at the request of other institutions or individuals for the
     purpose of scholarly research.\vspace*{.5in}\\ \\
     \hspace*{3.5in}
