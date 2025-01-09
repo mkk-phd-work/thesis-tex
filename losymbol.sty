@@ -1,0 +1,44 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{losymbol}[2024/09/25 Managing symbols]
+%
+%
+\def\losymbolsname{List of Symbols}
+\def\listofsymbols{\@ifundefined{chapter}{%
+		\section*{\losymbolsname \@mkboth
+		{\uppercase{\losymbolsname}}{\uppercase{\losymbolsname}}}
+	}{%
+		\chapter*{\losymbolsname \@mkboth
+		{\uppercase{\losymbolsname}}{\uppercase{\losymbolsname}}}
+	}
+ \@starttoc{los}
+}
+%
+%
+\def\addsymbolgroup#1{%
+\addtocontents{los}{\protect \large\textbf{#1}\normalsize\newline}}
+\def\addsymbol#1#2{%
+\addtocontents{los}{\protect \makenicesymbolline{#1}{#2}}}
+%
+%physical dimensions of columns
+%
+\newdimen\@lcsym %width of left column
+\@lcsym=2cm      %default 3cm
+%
+\newdimen\@mcsym %width of mid column (space)
+\@mcsym=1cm      %default 2cm
+%
+\newdimen\@rcsym %width of right column
+\@rcsym=\hsize   %initial width=textwidth
+%
+\advance\@rcsym by -\@lcsym %subtract lcsym
+\advance\@rcsym by -\@mcsym %subtract mid
+%
+%command for producing the actual line uses standard minipages
+%to cope with long definitions
+%
+\def\makenicesymbolline#1#2{%
+\begin{minipage}[t]{\@lcsym}#1\end{minipage}%
+$\hspace{\@mcsym}$%
+\begin{minipage}[t]{\@rcsym}#2\end{minipage}\newline}
+%
+%end of losymbol.sty
