@@ -1,95 +1,147 @@
-%\documentclass[12pt,lot,lof,los,loabbr,loalg,loe,lotodo]{thesis}
-\documentclass[12pt]{thesis}
-
+\documentclass[12pt,lot,lof]{puthesis}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{caption}
 \usepackage{latexsym}
-% \usepackage[draft]{utilspackage}
-\usepackage{rotating}  % \rotatebox command
-\usepackage{wrapfig}   % wrapfigure environment
-%
-%
-% BibTex files
-% \addbibresource{bibs/my-articles.bib}
-% %
-\addbibresource{biblography/explain}
-% \addbibresource{bibs/models.bib}
-% %
-% \addbibresource{bibs/mammogram-analysis.bib}
-% \addbibresource{bibs/numerical-sers.bib}
-% \addbibresource{bibs/numerical-polyps.bib}
-% \addbibresource{bibs/fmri-analysis.bib}
-% %
-%
-%\titleHU{}
-%\titleRO{}
-\titleEN{Explainable AI for Enhanced Decision Support in Demand Forecasting}
-\submitted{2025-09}  %graduation date
+\usepackage{graphicx}
+
+\usepackage{paralist}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{color}
+
+\usepackage{makecell}
+\usepackage{pgf-pie}
+\usepackage{listings}
+\usepackage{pifont}
+\usetikzlibrary{shadows}
+\usepackage[hidelinks]{hyperref}
+\usepackage[acronym, section]{glossaries}
+\usepackage{natbib}
+
+%\usepackage{setspace}
+%\usepackage[round, longnamesfirst]{natbib} % for nice bibliography
+
+%\input{./template/newcommands}
+
+\newcommand{\puteqnum}{
+    \refstepcounter{equation}\textup{(\theequation)}}
+
+% ================================================
+% Table settings
+\newcommand{\mysettingTableFont}{10}
+\newcommand{\mysettingTableFontBaseline}{12}
+
+\newcommand{\myTableStart}{\toprule}
+\newcommand{\myTableHeaderSep}{\midrule\midrule}
+\newcommand{\myTableSectionSep}{\midrule}
+\newcommand{\myTableEnding}{\bottomrule}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+% ================================================
+
+\newcommand{\mylstinputlistingIDA}[2]{
+    \setstretch{1.0}
+    \lstset{language=IDA, style=lstPythonStyle}
+    \lstinputlisting[language=IDA, caption={#2},captionpos=b]{#1}
+    \setstretch{1.5}
+}
+\newcommand{\mylstinputlistingPython}[2]{
+    \setstretch{1.0}
+    \lstset{language=Python, style=lstPythonStyle}
+    \lstinputlisting[language=Python, caption={#2},captionpos=b,label=#1]{#1}
+    \setstretch{1.5}
+}
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinelanguage{IDA}{
+    language=Python,
+    morecomment=[l]{//}
+}
+\lstdefinestyle{lstPythonStyle}{
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+% \title{}
+\title{Model Explanation Methods for Enhanced Decision Support in Demand Forecasting}
+\submitted{2025}  %graduation date
 \author{Mátyás Kuti-Kreszács}
-\tutorHU{Dr. Laura Dioșan, \\Professzor} %
-\tutorRO{Prof. Dr. Dioșan Laura} %
-\tutorEN{Prof. Dr. Dioșan Laura} %
+\advisor{Prof. Dr. Dioșan Laura} %
+\keywords{demand forecasting, explainable AI, decision support, machine learning, time series forecasting}
+% \dedication{Dedicated to ..}
+
 
 \abstract{
-% \input{chapters/00-introduction/01-abstract}
-Test
+    \input{chapters/abstract}
 }
 
-%\acknowledgements{
-%% \input{chapters/00-introduction/02-acknowledgement}
-%    \input{chapters/01_introduction/acknowledgement}
-%}
-%
-%\dedication{
-%% \input{chapters/00-introduction/03-dedication}
-%\input{chapters/01_introduction/dedication}
-%}
-
-\dedication{
-Dedication test
+\acknowledgements{
+%    \input{tex/acknow}
+    \input{chapters/abstract}
 }
 
-% Define list of equations
-\usepackage{tocloft}
-\usepackage{amsmath}
-%\newlistof{equations}{loe}{List of Equations}
-%\newcommand{\equationcaption}[1]{%
-%    \addcontentsline{loe}{equations}{\protect\numberline{\theequation}#1}%
+%\input{
+%    chapters/glossary.tex
 %}
-%
-% SYMBOL DEFINITIONS
-%
-% BS specific
-% \addsymbolgroup{Breast cancer diagnosis and detection}
-% \addsymbol{$\alpha$}{test}
-% Alzheimer specific
-% \addsymbolgroup{fMRI analysis for Alzheimer's disease detection}
-%
-%
-% ABBREVIATION DEFINITIONS
-% % General
-% \addabbreviation{ANN}{Artificial Neural Network}
 
 
-%
+
 \begin{document}
-    \input{chapters/01_introduction/introduction}
 
-%\chapter{test}
-%temp
-%
-%
-%\bibliographystyle{abbrv}
-%\bibliography{bibs/my-articles,bibs/mammogram-analysis}
-%\label{ch:bibliography}
-%\addcontentsline{toc}{chapter}{Bibliography}
-\unnumbered{chapter}{Bibliography}
-\label{ch:bibliography}
-\printbibliography[heading=none]
-%
-%
-%\appendix
-%\chapter{Code}
-%\label{ch:code}
-% \input{chapters/code}
-%
-%
+    \sloppy
+
+% \setstretch{1.5}
+
+% <<<<<<<<<<<<<<<<<<
+% Publications
+% \chapter*{List of publications}
+% \input{tex/publications}
+% \clearpage
+% >>>>>>>>>>>>>>>>>>
+
+
+% <<<<<<<<<<<<<<<<<<
+% \printglossary
+    \glsaddall
+    \printglossary[type=\acronymtype, title={Acronyms}, nonumberlist]
+% \printglossary[type=main, title={Glossary}]
+    \printglossary[type=main, title={Glossary}, nonumberlist]
+% >>>>>>>>>>>>>>>>>>
+
+%    \input{tex/document}
+    \input{chapters/structure}
+    \appendix
+
+    \setstretch{1}
+    \bibliographystyle{apalike}
+%    \bibliography{refs}
+    \bibliography{biblography/explain}
+    \label{bib}
+    %\bibliography{file1,file2}
+
+
 \end{document}
+
