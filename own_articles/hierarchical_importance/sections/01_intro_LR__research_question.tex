@@ -1,0 +1,223 @@
+\section{Introduction}\label{sec:introduction}
+%\textcolor{blue}{
+%%Introduction
+%\begin{itemize}
+%    \item Background: Importance of demand forecasting, machine learning, and hierarchical forecasting.
+%    \item Problem Statement: Challenges in understanding the rules and reasoning in hierarchical demand forecasting models.
+%    \item Objectives: Apply XAI to identify and analyze feature importance and the underlying rules in hierarchical models.
+%    \item Significance: Enhanced transparency, reasoning, and improved forecasting accuracy across hierarchical levels.
+%\end{itemize}
+%}
+%\textcolor{black}
+
+%Demand forecasting is a critical aspect of business operations, helping organizations make informed decisions about production, inventory, and resource allocation. Machine learning models have become increasingly popular for demand forecasting due to their ability to capture complex patterns in historical data. Hierarchical forecasting is a specialized approach that considers the hierarchical structure of the data, such as product categories, geographical regions, or time periods, to improve forecasting accuracy. However, understanding the rules and reasoning behind these models can be challenging, especially when dealing with large and complex datasets.
+
+Demand forecasting became really important for businesses and serves as the basis for optimal decision making in multiple areas in value chains such as manufacturing, logistics, and retail.
+%Given that the production and distribution of goods are influenced by the demand, accurate demand forecasting is crucial for companies to optimize their inventory levels, production planning, and resource allocation.
+By having multiple products, manufacturing locations, sales channels, and geographical regions, demand forecasting can be complex and hierarchical in nature.
+
+However, the problem can be formulated as a regression problem, with the aim of predicting the future demand based on historical data.
+This regression problem can be solved using machine learning models such as random forests, gradient boosting, and neural networks.
+Unfortunately, these models are considered black boxes and their predictions are hard to interpret.
+This is where explainable AI (XAI) techniques come into play, providing insights into the model's decision-making process and helping to understand the underlying rules and reasoning behind the predictions.
+
+One of the most fundamental methods for understanding a model's reasoning is feature importance or attribution, which allows identifying key contributor factors to the model's predictions.
+This is especially important in demand forecasting models, where demand drivers, such as price, promotions, weather, holidays, and economic indicators, can influence demand.
+Understanding these drivers can help companies optimize pricing, promotional activities, resource planning, and inventory management.
+
+Our goal is to identify applicable feature importance techniques to demand forecasting models, aiming to discover key features contributing to the decisions and explain the model's reasoning at different levels.
+The significance of our research is to improve the reasoning and transparency of multiseries and hierarchical demand forecasting models by providing insights into feature importance and the underlying rules at various levels.
+The methods employed are expected to be used not only in demand forecasting, but also in other grouped and hierarchical forecasting problems in different domains.
+
+
+\subsection{Research Questions}\label{sec:research_questions}
+
+The gap identified in the literature is the lack of studies that apply feature importance techniques to multiseries models
+for hierarchical demand forecasting problems and analyse the underlying decision drivers at different levels.
+Other studies focused on the representation of the explanation for sales forecasting models, but not on the explanation methods themselves\cite{fahse2022explanation}.
+Our research questions are:
+\begin{itemize}
+    \item \textbf{RQ1:} Can existing feature importance techniques be applied to multi-series and hierarchical models to identify key features and explain the underlying decision factors?
+%    \item \textbf{RQ1:} How can feature importance techniques be applied to multi-series and hierarchical models
+    \item \textbf{RQ2:} How feature importance can be translated to different hierarchical levels?
+    \item \textbf{RQ3:} How do these methods perform when applied to real-world datasets?
+    \item \textbf{RQ4:} How can the results be visualised and interpreted?
+    \item \textbf{RQ5:} What methods are most effective in this context?
+\end{itemize}
+
+In our current work, we partially address RQ1 and RQ2 by proposing a method to apply SHAP values to a LightGBM model
+used for forecasting hierarchical time-series data.
+Furthermore, we make progress on RQ3 using part of a real-world dataset; however, evaluation is still pending.
+Last but not least, we address RQ4 by visualising the results in a way that can be interpreted by the user.
+RQ5 is still open and will be addressed in future work.
+
+
+
+%This way, the demand forecasting models can help companies to optimize their inventory levels, production planning, and resource allocation.
+%machine learning models are being used more and more compared to traditional statistical models due to their ability to capture complex patterns in historical data while being more flexible to adapt various data.
+
+%is a specialized approach that considers the hierarchical structure of the data, such as product categories, geographical regions, or time periods, to improve forecasting accuracy. However, understanding the rules and reasoning behind these models can be challenging, especially when dealing with large and complex datasets.
+
+%
+%
+%%Literature Review
+%\begin{itemize}
+%    \item  Demand Forecasting Methods: Machine learning models used.
+%    \item Multi-series, multivariate and hierarchical forecasting: Concept and importance.
+%    \item Global and grouped feature importance: Techniques for understanding feature importance at different levels.
+%    \item Rules and Reasoning in AI: Understanding model decisions.
+%    \item Existing Research: Studies on feature importance, hierarchical forecasting, and XAI in model reasoning.
+%    \item Research Gaps: Need for XAI application in hierarchical forecasting.
+%\end{itemize}
+
+%Demand Forecasting Methods: Machine learning models used.
+%\color{red}
+%Demand forecasting is a critical aspect of business operations, helping organizations make informed decisions about production, inventory, and resource allocation.
+%Machine learning models have become increasingly popular for demand forecasting due to their ability to capture complex patterns in historical data.
+%Hierarchical forecasting is a specialized approach that considers the hierarchical structure of the data, such as product categories, geographical regions, or time periods, to improve forecasting accuracy.
+%However, understanding the rules and reasoning behind these models can be challenging, especially when dealing with large and complex datasets.
+%Explainable AI (XAI) techniques provide insights into the model's decision-making process and help understand the underlying rules and reasoning behind the predictions.
+%Our objective is to apply feature importance techniques from XAI to hierarchical demand forecasting models, aiming to identify key features contributing to the decisions and explain the model's reasoning at different hierarchical levels.
+%We aim to tackle global and grouped feature importances as we are interested in understandign the importance of features at different levels of the hierarchy.
+%Global feauture importance techniques like permutation fearure importance to understand the importance of features at the global level while local  SHAP importances can be used as grouped feature importances(cohort) techniques can be used to understand the importance of features at the group level.
+%\color{black}
+
+
+\section{Literature review}\label{sec:literature_review}
+
+
+%\textbf{Forecasting ensemble models}
+%\subsection{Demand Forecasting with machine learning} \label{subsec:demand-forecasting-with-machine-learning}
+%Demand forecasting is a prediction problem that aims to estimate future needs based on historical data.
+%Statistical forecasting methods such as ARIMA\cite{jamal_fattah_forecasting_2018,ingle2021demand} and exponential smoothing \cite{ingle2021demand} have been widely used in demand forecasting.
+%However, they have limitations in intermittent multi-series and hierarchical forecasting, where machine learning models have shown better performance\cite{spiliotis2022comparison}.
+%An important aspect also is that there may be multiple exogenous variables so-called demand drivers\cite{vandeput2023demand} that can influence the demand.
+%Internal factors such as price, promotions, and external factors like weather, holidays, and economic indicators can be considered as demand drivers.
+%These can be used as features in machine learning models to improve forecast accuracy.
+%
+%Machine learning models such as tree ensembles and neural networks have been successfully applied to demand forecasting tasks\cite{spiliotis2022comparison}.
+%Ensemble models in general can be homogeneous with individual models of the same type or heterogeneous with models of different types.
+%We considered only homogeneous ensemble tree models because of the applicability of some model-specific explanation methods.
+%To build tree ensembles, bagging methods such as random forest\cite{leo_breiman_random_2001} can be used, which trains multiple decision trees on different subsets of the data, and the final prediction is the average of the predictions of the individual models.
+%In addition, boosting methods such as Gradient Boosting Machines (GBM) \cite{jerome_h_friedman_greedy_2001}, XGBoost \cite{tianqi_chen_xgboost_2016}, and LightGBM \cite{guolin_ke_highly_2017}, which train models sequentially on the residuals of the previous model, in this case using the sum of individual predictions.
+%In a notable forecasting competition \cite{makridakis_m5_2022}, a LightGBM model was the winner and secured four of the top five positions.
+%
+%\subsection{Forecasting techniques} \label{subsec:forecasting-techniques}
+%Forecasting techniques can be divided into single-series or multi-series forecasting from the perspective of the model's input.
+%Single-series forecasting refers to the prediction of a single time series, while multiseries forecasting involves the prediction of multiple time series, with the same global model\cite{joachim2023demand}.
+%These series can be related to each other, such as sales of different products, or they can be independent, such as sales in different regions; therefore, it is important to consider the hierarchical structure of the data.
+%
+%Hierarchical forecasting refers to the prediction of multiple time series that are related to each other in a hierarchical structure\cite{hyndman2018forecasting}.
+%It can be tackled with different single-level approaches, such as bottom-up, top-down, or middle-out\cite{hyndman2018forecasting}.
+%The top-down approach would involve a single series model for the total demand and then disaggregating it to the lower levels.
+%The middle-out and bottom-up approach would involve a multiseries model.
+%Grouped time-series forecasting is a special case of hierarchical forecasting, where the series are aggregated based on attributes such as product type, region, or sales channel.
+%
+%\cite{vandeput2023demand} suggests three major hierarchies in demand forecasting: product hierarchy, geographical hierarchy, and time hierarchy.
+%The product hierarchy refers to the categorisation of products according to their attributes, such as product type, brand, or category.
+%The geographic hierarchy involves the division of sales regions based on geographic attributes, such as country, state, or city down to the point of sale.
+%Time hierarchy refers to the temporal structure of the data, such as year, month, week, day, and hour.
+
+%\subsection{Feature importance} \label{subsec:feature-importance-in-tree-ensemble-models}
+%Feature importance (FI) or feature attribution is considered an interpretation method resulting in a summary statistic that assigns a score to each input feature \cite{molnar2022}.
+%Depending on their scope, the FI methods can be global or local \cite{Guidotti2018,molnar2022}.
+%The global feature importance (GFI) or model feature attribution methods explain the contribution of features to overall predictions, while the local FI quantifies feature contributions to specific predictions \cite{molnar2022}.
+%Although related, GFI methods differ from feature selection, which identifies irrelevant features before training.
+%GFI methods can be model-specific, which are limited to specific model types, while model-agnostic ones are applicable independent of the model type\cite{molnar2022}.
+%Another categorisation of FI methods is given by how it is calculated, in which case the importance can be based on the model's structure, while the other approach relies on a dataset.
+%
+%Among the model-agnostic methods, one of the most common is permutation feature importance (PFI) which was proposed to measure FI in random forests\cite{Breiman2001}.
+%It is a model-agnostic, data-dependent method that measures the decrease in the model's performance when the features are permuted.
+%The PFI can be calculated using different metrics such as the mean squared error (MSE), the mean absolute error (MAE), or the coefficient of determination ($R^2$).
+%PFI also has limitations, as it is sensitive to over- and underfitting\cite{molnar2020limitations}, in which case the FI differs on training and test data, so the use of both datasets can be beneficial.
+%In addition, another flaw of the PFI method is that it can generate cases in which the model does not have training data\cite{Molnar_2020_pitfalls,giles_hooker_unrestricted_2021},
+%but other methods were proposed to overcome this\cite{ian_covert_understanding_2020, kristin_blesch_conditional_2023}.
+%% todo include conditional PFI
+%
+%SHAP(SHapley Additive exPlanation)\cite{scott_lundberg_unified_2017} values contribute local explanation for individual predictions, but aggregates of it are useful to assess the importance of global features.
+%For example, the mean absolute SHAP values quantify the importance of the feature regardless of the direction of the impact on the prediction.
+%There are different algorithms for approximation from which Kernel SHAP\cite{scott_lundberg_unified_2017} is one that is model-agnostic.
+%TShap \cite{vikas_c_raykar_tsshap_2023} is a method for estimating SHAP values for time series data, but it uses a surrogate model, so it gives the FI of the surrogate.
+%Another related method is SAGE \emph{(Shapley additive global importance)} \cite{ian_covert_understanding_2020}, which estimates the contribution of each feature to the model's performance.
+%
+%Tree specific GFI methods are gain-based importance values which were already introduced with decision trees \cite{gordon_classification_1984}
+%It measures of the reduction in mean average error(MAE) made by the decisions based on the respective feature.
+%Another measure is the split-based importance\cite{tianqi_chen_xgboost_2016} refers to the number of decisions made by the model based on a feature.
+%The previously presented SHAP also has a tree model-specific solution for approximation, called TreeSHAP \cite{scott_lundberg_local_2020}
+%
+%%\subsection{Triad of model interpretability}
+%%The triad of model interpretability consists of model transparency, model trust, and model understanding\cite{molnar2022}.
+%
+%\subsection{Explainability in forecasting}\label{subsec:explainability-in-forecasting}
+%The number of publications on forecasting explainability is limited.
+%\cite{fahse2022explanation} tackled the presentation of explanations for sales forecasting models, but not the explanation methods themselves.
+%\cite{Saluja_2021} used SHAP values to explain the prediction of a time series model but on local level and not global level.
+%Skforecast~cite{joachim2023demand} library extracts model specific global feature importance from tree ensemble models.
+%The work is focused on either global feature importance or local feature contribution without considering the multi-series and hierarchical structure of the data.
+%
+%\subsection{Feature importance as a basis for model reasoning}\label{subsec:feature-importance-as-basis-for-model-reasoning}
+%Feature importance methods can provide insight into the model's decision-making process and help to understand the underlying rules and reasoning behind the predictions.
+%By including demand drivers as features in the model, the feature importance methods can help to identify the key drivers of demand.
+%For external factors such as weather, holidays, and economic indicators, the importance of the characteristics can help to understand their impact on demand.
+%Through internal factors like price, promotions, the feature importance can help to understand post-promotion effects and the impact of price changes on the demand\cite{vandeput2023demand}.
+%Knowing the influence of internal factors can help to optimize pricing strategies and promotional activities.
+%However, causation and correlation are different concepts, and the feature importance methods can only provide correlation;
+%therefore, the identified key features should be further analyzed to understand the causation\cite{Breiman2001}
+
+
+
+%\subsection{Research Gaps}
+%The literature review revealed a gap in the application of feature importance techniques to multi-series models for hierarchical demand forecasting problems.
+%The studies focused on the presentation of explanations for sales forecasting models but not on the explanation methods themselves.
+%Our research aims to address this gap by applying feature importance techniques to hierarchical models and analyzing the underlying decision drivers at different levels.
+
+
+%Research Questions:
+%\begin{itemize}
+%\item How can XAI techniques be applied to hierarchical models to identify key features and explain the underlying rules?
+%\item What are the differences in feature importance and model reasoning at various hierarchical levels?
+%\item How does understanding the rules and reasoning improve forecasting accuracy?
+%\end{itemize}
+
+
+%%! Author =
+%
+%
+%\section{Introduction}
+%
+%\begin{itemize}
+%\item Background: Importance of demand forecasting, the role of machine learning, and the concept of hierarchical forecasting.
+%\item Problem Statement: Challenges in achieving interpretability and accuracy in hierarchical demand forecasting models.
+%\item Objectives: To apply explainable AI methods to identify and analyze feature importance in hierarchical demand forecasting models.
+%\item Significance: Improved transparency and trust in machine learning models, better feature selection, and enhanced forecasting accuracy across hierarchical levels.
+%\end{itemize}
+%Literature Review:
+%
+%\begin{itemize}
+%\item Demand Forecasting with Machine Learning: Overview of machine learning techniques (e.g., decision trees, random forests, gradient boosting) used in demand forecasting.
+%\item Hierarchical Forecasting: Explanation of hierarchical forecasting, its importance, and current methods.
+%\item Explainable AI (XAI) Techniques: Review of XAI methods such as SHAP (SHapley Additive exPlanations), LIME (Local Interpretable Model-agnostic Explanations), and feature importance scores.
+%\item Existing Research: Discussion of existing studies on feature importance and hierarchical forecasting.
+%\item Research Gaps: Identified gaps in applying XAI for feature importance in hierarchical demand forecasting models.
+%\end{itemize}
+%
+%
+%Research Questions or Hypotheses:
+%
+%\begin{itemize}
+%\item Research Questions:\begin{enumerate}
+%\item How can explainable AI techniques be applied to hierarchical demand forecasting models to identify key features?
+%\item What are the differences in feature importance at different hierarchical levels?
+%\item How does understanding feature importance at various levels improve overall forecasting accuracy?
+%\end{enumerate}
+%
+%\end{itemize}
+%
+%Hypotheses:
+%\begin{enumerate}
+%\item Explainable AI methods can provide clear and actionable insights into feature importance across hierarchical levels.
+%\item Identifying key features at different levels enhances the accuracy and reliability of hierarchical demand forecasts.
+%\end{enumerate}
+%
+%
+%

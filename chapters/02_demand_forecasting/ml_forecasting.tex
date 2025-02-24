@@ -1,3 +1,20 @@
 
 % Machine learning for forecasting
 
+
+\subsection{Demand Forecasting with machine learning} \label{subsec:demand-forecasting-with-machine-learning}
+Demand forecasting is a prediction problem that aims to estimate future needs based on historical data.
+Statistical forecasting methods such as ARIMA\cite{jamal_fattah_forecasting_2018,ingle2021demand} and exponential smoothing \cite{ingle2021demand} have been widely used in demand forecasting.
+However, they have limitations in intermittent multi-series and hierarchical forecasting, where machine learning models have shown better performance\cite{spiliotis2022comparison}.
+An important aspect also is that there may be multiple exogenous variables so-called demand drivers\cite{vandeput2023demand} that can influence the demand.
+Internal factors such as price, promotions, and external factors like weather, holidays, and economic indicators can be considered as demand drivers.
+These can be used as features in machine learning models to improve forecast accuracy.
+
+Machine learning models such as tree ensembles and neural networks have been successfully applied to demand forecasting tasks\cite{spiliotis2022comparison}.
+Ensemble models in general can be homogeneous with individual models of the same type or heterogeneous with models of different types.
+We considered only homogeneous ensemble tree models because of the applicability of some model-specific explanation methods.
+To build tree ensembles, bagging methods such as random forest\cite{leo_breiman_random_2001} can be used, which trains multiple decision trees on different subsets of the data, and the final prediction is the average of the predictions of the individual models.
+In addition, boosting methods such as Gradient Boosting Machines (GBM) \cite{jerome_h_friedman_greedy_2001}, XGBoost \cite{tianqi_chen_xgboost_2016}, and LightGBM \cite{guolin_ke_highly_2017}, which train models sequentially on the residuals of the previous model, in this case using the sum of individual predictions.
+In a notable forecasting competition \cite{makridakis_m5_2022}, a LightGBM model was the winner and secured four of the top five positions.
+
+

@@ -1,0 +1,163 @@
+%% The first command in your LaTeX source must be the \documentclass command.
+%%
+%% Options:
+%% twocolumn : Two column layout.
+%% hf: enable header and footer.
+\documentclass[
+% twocolumn,
+% hf,
+]{ceurart}
+
+%%
+%% One can fix some overfulls
+% \sloppy
+
+%%
+%% Minted listings support 
+%% Need pygment <http://pygments.org/> <http://pypi.python.org/pypi/Pygments>
+\usepackage{minted}
+\usepackage{tikz}
+\usepackage{subcaption}
+% \usepackage{biblatex}
+%% auto break lines
+\setminted{breaklines=true}
+
+
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+
+
+%
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=gray!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!20]
+\tikzstyle{annotation} = [rectangle, text width=6cm, align=left, draw=black, fill=yellow!20, rounded corners, minimum height=2.5cm]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+%\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=gray!30]
+%\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!20]
+%\tikzstyle{annotation} = [rectangle, text width=8cm, align=left, draw=black, fill=yellow!20, rounded corners, minimum height=2.5cm]
+%\tikzstyle{arrow} = [thick,->,>=stealth]
+
+
+%%
+%% end of the preamble, start of the body of the document source.
+\begin{document}
+
+%%
+%% Rights management information.
+%% CC-BY is default license.
+
+    \copyrightyear{2024}
+    \copyrightclause{Copyright for this paper by its authors.
+    Use permitted under Creative Commons License Attribution 4.0
+    International (CC BY 4.0).}
+
+%%
+%% This command is for the conference information
+
+    \conference{RuleML+RR'24: Companion Proceedings of the 8th International Joint Conference on Rules and Reasoning,
+        September 16--22, 2024, Bucharest, Romania}
+
+
+%%
+%% The "title" command
+    \title {
+        Optimising Hierarchical Demand Forecasting with Explainable AI: Insights into Key Drivers
+    }
+
+%%
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+    \author{M\'{a}ty\'{a}s Kuti-Kresz\'{a}cs}[%
+        orcid=0009-0004-4997-2000,
+        email=matyas.kuti@ubbcluj.ro,
+        url=https://www.linkedin.com/in/kkmatyas/,
+    ]
+
+    \address{
+%Babeș-Bolyai University, Cluj-Napoca
+        Babe\c{s}-Bolyai University, Cluj-Napoca
+    }
+
+
+%%
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+    \begin{abstract}
+%        A clear and well-documented \LaTeX{} document
+%        is presented as an
+%        article formatted for publication by CEUR-WS in a conference
+%        proceedings. Based on the ``ceurart'' document class, this article
+%        presents and explains many of the common variations, as well as many
+%        of the formatting elements an author may use in the preparation of
+%        the documentation of their work.
+%        \textcolor{red}{
+%            Demand forecasting is a prediction problem that aims to estimate future needs based on historical data.
+%            In order to better understand the decision-making process of hierarchical demand forecasting models,
+%            we propose a method to apply SHAP values to the forecasting model, aiming to identify the key drivers of the forecast. This method can help to understand the impact of price changes, promotional activities, and resource planning on forecasting accuracy. In our current work, we use a real-world dataset to evaluate the proposed methods. We use XAI(Explainable AI) techniques to identify key features and analyze their impact on the forecasts.
+%        }
+        Demand forecasting is a prediction problem that aims to estimate future needs based on historical data.
+        It serves as the basis for optimal decision making in multiple areas of value chains such as manufacturing, logistics, and retail.
+        It is particularly important in demand forecasting models where demand drivers like price, promotions, and resource planning can help companies optimise pricing, promotional activities, resource planning, and inventory planning.
+        Our goal is to identify applicable feature importance techniques to hierarchical forecasting problems by providing insights into feature importance and the underlying decision-making process and helping to understand the model's reasoning.
+        We propose applying SHAP values to a forecasting model while using part of a real-world dataset.
+        The results will provide insight into the key drivers of the forecast and help to understand the impact of the features
+        on the decisions made by the model.
+    \end{abstract}
+
+    \maketitle
+%
+%\textcolor{red}{ %TODO: Add the following sections
+%The submission should cover the following aspects:
+%\begin{itemize}
+%    \item (Identified some, but if it's relevant) The identification of a significant problem in a research field relevant to RuleML+RR 2024.
+%    \item (Done) An outline of the current knowledge in the problem’s domain, as well as an overview of existing solutions.
+%    \item (Review) A clear formulation of the research question and motivation.
+%    \item (Results added not described) A presentation of (possibly preliminary) ideas, the proposed approach, and the results achieved so far.
+%    \item (Review)A sketch of the applied research methodology and its positioning in the field.
+%    \item (Expected contribution:done)A description of the student’s contribution to the research.
+%    \item (TODO:)A discussion of how the suggested solution is different, new, or better as compared to the state of the art.
+%    \item (Done)A research plan and the potential achievements.
+%\end{itemize}
+%}
+
+%The accepted DC papers will be presented to an interested audience and will be discussed with a panel of senior researchers from academia and the industry. Students will present their work through brief oral presentations during a dedicated session of RuleML+RR 2024.
+
+
+
+
+
+    \input{sections/01_intro_LR__research_question}
+%\include
+
+    \input{sections/02_methodology_preliminary_results}
+
+    \input{sections/03_contribution_challenges_conclusion}
+
+%\input{sections/04_research_plan}
+
+
+%%
+%% Define the bibliography file to be used
+    \bibliography{sample-ceur}
+
+%%
+%% If your work has an appendix, this is the place to put it.
+    \appendix
+
+%\section{Online Resources}
+%
+%
+%The sources for the ceur-art style are available via
+%\begin{itemize}
+%\item \href{https://github.com/yamadharma/ceurart}{GitHub},
+%% \item \href{https://www.overleaf.com/project/5e76702c4acae70001d3bc87}{Overleaf},
+%\item
+%  \href{https://www.overleaf.com/latex/templates/template-for-submissions-to-ceur-workshop-proceedings-ceur-ws-dot-org/pkfscdkgkhcq}{Overleaf
+%    template}.
+%\end{itemize}
+
+\end{document}
+
+%%
+%% End of file

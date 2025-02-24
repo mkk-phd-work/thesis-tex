@@ -1,0 +1,55 @@
+
+\begin{figure}
+    \centering
+\begin{tikzpicture}[node distance=2cm]
+
+%\node (start) [startstop] {Start};
+\node (data) [process] {Data Collection};
+\node (tool) [process, below of=data] {Tool Evaluation};
+\node (model) [process, below of=tool] {Model Implementation};
+\node (importance) [process, below of=model] {Feature Importance Analysis};
+\node (reasoning) [process, below of=importance] {Model Reasoning};
+%\node (stop) [startstop, below of=reasoning] {End};
+
+%\draw [arrow] (start) -- (data);
+\draw [arrow] (data) -- (tool);
+\draw [arrow] (tool) -- (model);
+\draw [arrow] (model) -- (importance);
+\draw [arrow] (importance) -- (reasoning);
+%\draw [arrow] (reasoning) -- (stop);
+
+% Annotations
+%\node [annotation, right=3cm of data.east, anchor=west] (dataann) {
+%    \begin{itemize}
+%        \item Find hierarchical time series data.
+%        \item Include sales/demand across categories and regions.
+%        \item Add relevant exogenous variables.
+%    \end{itemize}
+%};
+%
+%\node [annotation, right=3cm of model.east, anchor=west] (modelann) {
+%    \begin{itemize}
+%        \item Build global models for multiple time series.
+%        \item Integrate exogenous variables.
+%    \end{itemize}
+%};
+%
+%\node [annotation, right=3cm of importance.east, anchor=west] (importanceann) {
+%    \begin{itemize}
+%        \item Determine feature importance.
+%        \item Use aggregation and decomposition.
+%        \item Assess feature impact on forecasts.
+%    \end{itemize}
+%};
+%
+%\node [annotation, right=3cm of reasoning.east, anchor=west] (reasoningann) {
+%    \begin{itemize}
+%        \item Analyze feature contributions.
+%        \item Discover rules at different hierarchy levels.
+%    \end{itemize}
+%};
+\end{tikzpicture}
+\caption{Research design} \label{fig:research_design}
+\end{figure}
+
+

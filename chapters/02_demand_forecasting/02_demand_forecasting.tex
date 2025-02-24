@@ -2,7 +2,7 @@
 %\label{ch:demand_forecasting}
 
 
-\section{Statistical Models for Demand Forecasting}
+\section{Statistical Models}
 \label{sec:statistical_models}
 \input{chapters/02_demand_forecasting/statistical_models}
 
@@ -10,6 +10,8 @@
 \section{Machine Learning Models}
 \label{sec:machine_learning_models}
 \input{chapters/02_demand_forecasting/ml_forecasting}
+
+\subsection{Forecasting techniques} \label{subsec:forecasting-techniques}
 \begin{itemize}
     \item Single-step forecasting
     \item Multi-step forecasting
@@ -21,6 +23,26 @@ Forecasting models
     \item Independent multi-series
     \item Dependent multi-series or multi-variate
 \end{itemize}
+
+Forecasting techniques can be divided into single-series or multi-series forecasting from the perspective of the model's input.
+Single-series forecasting refers to the prediction of a single time series, while multiseries forecasting involves the prediction of multiple time series, with the same global model\cite{joachim2023demand}.
+These series can be related to each other, such as sales of different products, or they can be independent, such as sales in different regions; therefore, it is important to consider the hierarchical structure of the data.
+
+
+
+%Hierarchical forecasting
+
+Hierarchical forecasting refers to the prediction of multiple time series that are related to each other in a hierarchical structure\cite{hyndman2018forecasting}.
+It can be tackled with different single-level approaches, such as bottom-up, top-down, or middle-out\cite{hyndman2018forecasting}.
+The top-down approach would involve a single series model for the total demand and then disaggregating it to the lower levels.
+The middle-out and bottom-up approach would involve a multiseries model.
+Grouped time-series forecasting is a special case of hierarchical forecasting, where the series are aggregated based on attributes such as product type, region, or sales channel.
+
+\cite{vandeput2023demand} suggests three major hierarchies in demand forecasting: product hierarchy, geographical hierarchy, and time hierarchy.
+The product hierarchy refers to the categorisation of products according to their attributes, such as product type, brand, or category.
+The geographic hierarchy involves the division of sales regions based on geographic attributes, such as country, state, or city down to the point of sale.
+Time hierarchy refers to the temporal structure of the data, such as year, month, week, day, and hour.
+
 
 
 \section{Multi-step Forecasting}

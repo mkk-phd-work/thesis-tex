@@ -1,0 +1,191 @@
+\section{Discussion}\label{sec:discussion}
+
+%    \begin{itemize}
+%        \item Provide a concise summary of the most important results from your analysis.
+%        \item Relate the findings back to your research questions or hypotheses.
+%        \item Highlight any unexpected or novel results.
+%    \end{itemize}
+%   \item \textbf{RQ1:} Can existing feature importance techniques be applied to multi-series and hierarchical models?
+
+
+%\textcolor{red}{ TODO: Add discussion on the results and the implications for the research.}
+%\textcolor{blue}{
+%
+%    \subsection*{Summary of Key Findings}
+%    \begin{itemize}
+%        \item Provide a concise summary of the most important results from your analysis.
+%        \item Relate the findings back to your research questions or hypotheses.
+%        \item Highlight any unexpected or novel results.
+%    \end{itemize}
+%    \subsection*{2. Interpretation of Results}
+%    \begin{itemize}
+%        \item Explain what the results mean in the context of your research objectives.
+%        \item Relate your findings to the existing literature, showing how your work supports, extends, or challenges previous research.
+%        \item Discuss the practical or theoretical significance of your findings. How do they contribute to the field?
+%    \end{itemize}
+%    \subsection*{3. Comparison with Previous Work}
+%    \begin{itemize}
+%        \item Compare your findings with those from other studies. Are your results consistent or different? Why might that be?
+%        \item Discuss how your work fits into the broader literature and theoretical framework.
+%    \end{itemize}
+%    \subsection*{4. Implications of the Findings}
+%    \begin{itemize}
+%        \item Explain the practical or theoretical implications of your results.
+%        \item Consider the broader impact of your findings on the field or on real-world applications.
+%        \item If relevant, discuss policy or decision-making implications.
+%    \end{itemize}
+%    \subsection*{5. Limitations of the Study}
+%    \begin{itemize}
+%        \item Acknowledge any limitations in your research, such as constraints related to the methodology, data, or scope of the study.
+%        \item Discuss how these limitations might have affected your results or interpretations.
+%        \item Suggest ways these limitations could be addressed in future research.
+%    \end{itemize}
+%    \subsection*{6. Future Research Directions}
+%    \begin{itemize}
+%        \item Propose areas for future research based on your findings and the limitations you've identified.
+%        \item Discuss how future studies could build on your work, including new methods, expanded datasets, or different research contexts.
+%    \end{itemize}
+%    \subsection*{7. Practical Applications (if applicable)}
+%    \begin{itemize}
+%        \item If your research has practical applications, discuss how your findings can be applied in industry, policy, or other fields.
+%        \item Describe specific use cases or real-world scenarios where your work could be impactful.
+%    \end{itemize}
+%}
+
+%\subsection{Expected contributions}
+%
+%This research is expected to contribute to the following areas:
+%\begin{itemize}
+%    \item Evaluation of method: Assessment of feature importance methods in hierarchical forecasting models.
+%    \item Guidelines, best practices and limitations: Recommendations for explaining hierarchical forecasting models.
+%    \item Tool development: Development of tools for better understanding of hierarchical models.
+%\end{itemize}
+%\subsection{Challenges and next steps} \label{subsec:challenges_next_steps}
+%We already faced some challenges during the implementation of initial approach:
+%\begin{itemize}
+%    \item Proper tooling: SHAP library doesn't support models with categorical variables.
+%    This is a limitation for the current library.
+%    \item Visualizing the results: The SHAP library provides plotting functions, but for large number of series the plots were not working properly.
+%\end{itemize}
+
+
+%    \begin{itemize}
+%        \item Acknowledge any limitations in your research, such as constraints related to the methodology, data, or scope of the study.
+%        \item Discuss how these limitations might have affected your results or interpretations.
+%        \item Suggest ways these limitations could be addressed in future research.
+%    \end{itemize}
+
+
+In this work, we managed to calculate the Shapley values for the predictions of a hierarchical forecasting model
+with some limitations, while we also aggregated these values to different levels of the hierarchy.
+By this we addressed the first two research questions.
+We used a sample of a real-world dataset to evaluate the proposed method working towards the third research question.
+We visualised the SHAP values at different levels of the hierarchy and provided some interpretation of the results.
+To respond to the fourth research question, we plan to expand the literature review to include a wider range of XAI techniques.
+
+
+%methodological limitations
+This research is expected to contribute in several key areas.
+First, it will provide an evaluation of feature importance methods in the context of hierarchical forecasting models.
+This will help to identify what methods are most effective and how they can be applied to improve model interpretability.
+Second, it aims to provide guidelines, best practices, and limitations of effectively explaining these models.
+Finally, the research will support the development of tools that improve the understanding of hierarchical forecasting models
+and their underlying rules and reasoning.
+
+
+The limitations of our study include the handling of categorical variables in the SHAP library.
+The effect of ordinal encoding that induces an order on the categorical variables may not be appropriate for all cases.
+Low feature importance for the categorical variables may be due to the encoding method.
+Recent research \cite{kristin_blesch_conditional_2023} proposes a method to handle categorical variables for conditional feature importance.
+% data limitations
+With regard to data limitations, the dataset used is simplified in multiple dimensions.
+First, with aggregation of sales data at the weekly level, multiple exogenous variables such as special events could not be included.
+Second, the dataset is limited to a single product category, which may not be representative of all hierarchical forecast scenarios.
+Lastly, the input data was limited to the sales lag of the product without considering other products in the same category.
+The independence of products in the same category may not be a realistic assumption.
+
+During the implementation of our initial approach, we encountered several challenges.
+One of the main issues was the lack of appropriate tools.
+For example, the SHAP library does not support categorical features in the current version.
+In addition,we faced difficulties in visualising the results;
+although the SHAP library offers integrated graphing functions, these have not been effectively used to deal with
+a large number of cohors, leading to errors and incomplete plots.
+Although these issues are not straightforward to solve, they are a sign of unexplored areas in the field of XAI and hierarchical forecasting.
+
+There are also potential risks that could impact research in addition to challenges.
+One of the main risks is the availability of data, especially real-world datasets that include exogenous variables or demand drivers.
+Synthetic datasets can be used as an alternative, but they may not capture the complexity of real-world scenarios.
+The evaluation of methods is another potential risk, as it may be difficult to assess the performance of the explanation methods.
+In case of application grounded evaluation, it may be difficult to find experts in the field who can provide meaningful feedback
+given that each product category may require different domain knowledge\cite{doshi}.
+
+\subsection{Future work} \label{subsec:future_work}
+
+To address the challenges and limitations of the current research, several next steps are proposed for each part of the research.
+\begin{itemize}
+    \item First, the literature review will be extended to include a broader range of XAI techniques.
+    Given the current context, we focus on feature importance-based evaluation, partial dependence plots, feature interaction, and other XAI techniques that should be included in the review.
+    \item Data collection will be expanded to include synthetic datasets and additional real-world datasets.
+    In addition, including more data from the actual dataset and forecasting on the day level can be a future direction.
+    \item Evaluation and implementation of the tool for other methods will be needed.
+    Conditional permutation importance can be also evaluated after implementing the method.
+    \item The model implementation could be extended to include additional ML models for hierarchical forecasting.
+    An additional enhancement to that would be dependent multiseries forecasting, as usually product sales are not independent
+of each other, especially in the same product category.
+    \item Rule extraction based on feature importance and interaction can be a future direction.
+    \item After covering the methodological aspects, an empirical study with evaluation in terms of accuracy and computational efficiency is planned.
+\end{itemize}
+
+
+%\textbf{Next steps}
+%\begin{itemize}
+%%    \item Literature Review: Extend it with focus on the following aspects:
+%%        \begin{itemize}
+%%            \item XAI(Explainable AI) techniques and their application in demand forecasting.
+%%            \item Application of other XAI methods in hierarchical and multi-series models.
+%%            \item Feature importance and model reasoning in hierarchical models.
+%%            \item Challenges and limitations of existing XAI methods.
+%%        \end{itemize}
+%%    \item Data collection: Create synthetic dataset and collect additional real-world datasets for hierarchical demand forecasting.
+%%    \item Tool evaluation or implementation: Evaluate existing libraries for hierarchical forecasting and XAI techniques or implement custom tools specialized for hierarchical forecasting.
+%%    \item Model implementation: Train and evaluate additional ML models for hierarchical forecasting.
+%    \item Feature importance analysis: Apply XAI techniques to determine feature importance and assess their impact on forecasts.
+%    \item Model reasoning: Analyze feature contributions to uncover underlying rules, especially at different hierarchy levels, and how to extract rules.
+%    Synthesize the results to provide a better understanding of the model's reasoning
+%
+%\end{itemize}
+
+%For future work we plan to conduct an empirical study on the applicability of feature importance methods to hierarchical forecasting models.
+%For this purpose we plan to use both synthetic and real-world datasets to evaluate the methods.
+%Additionally, the inclusion fo these techniques in decision support systems can be a future direction.
+
+%\textcolor{red}{
+%
+%    \subsection{Conclusion}
+%    \begin{itemize}
+%        \item Summary of objectives and findings.
+%        \item Importance of XAI in improving hierarchical forecasting models and understanding their reasoning.
+%    \end{itemize}
+%}
+
+\subsection{Conclusion}\label{subsec:conclusion}
+Nowadays every organisation thrives in the direction of becoming data driven.
+In this context, data-driven decision making is crucial for optimising business processes to remain competitive.
+This effort is supported by the use of data mining, machine learning, and AI techniques.
+To avoid blindly trusting ML models,it is crucial to understand the reasoning behind their decisions.
+Our goal is to demystify hierarchical forecasting models by applying XAI techniques.
+
+This study explores the usage of SHAP values to explain the importance of features in hierarchical forecasting models.
+Our preliminary results focused on the practical aspects of aggregating SHAP values at different levels of
+hierarchy. This approach provides insights into the model's reasoning.
+We plan to extend this work by evaluating other XAI techniques to enhance the explainability of hierarchical forecasting models.
+
+
+\textbf{Acknowledgement}
+
+This work was done in collaboration with my Ph.D. supervisor, Laura Diosan, from Babes-Bolyai University.
+I am grateful for her continued support and encouragement throughout this research.
+
+
+
+

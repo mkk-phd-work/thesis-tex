@@ -1,5 +1,10 @@
 %\chapter{Interpretability and explainability}
 
+%\subsection{Triad of model interpretability}
+%The triad of model interpretability consists of model transparency, model trust, and model understanding\cite{molnar2022}.
+
+
+
 \section{Local explainability}
 \label{sec:local_explainability}
 
@@ -11,9 +16,57 @@
 \section{Global explainability}
 \label{sec:global_explainability}
 
+\subsection{Feature importance} \label{subsec:feature-importance-in-tree-ensemble-models}
+Feature importance (FI) or feature attribution is considered an interpretation method resulting in a summary statistic that assigns a score to each input feature \cite{molnar2022}.
+Depending on their scope, the FI methods can be global or local \cite{Guidotti2018,molnar2022}.
+The global feature importance (GFI) or model feature attribution methods explain the contribution of features to overall predictions, while the local FI quantifies feature contributions to specific predictions \cite{molnar2022}.
+Although related, GFI methods differ from feature selection, which identifies irrelevant features before training.
+GFI methods can be model-specific, which are limited to specific model types, while model-agnostic ones are applicable independent of the model type\cite{molnar2022}.
+Another categorisation of FI methods is given by how it is calculated, in which case the importance can be based on the model's structure, while the other approach relies on a dataset.
+
+Among the model-agnostic methods, one of the most common is permutation feature importance (PFI) which was proposed to measure FI in random forests\cite{Breiman2001}.
+It is a model-agnostic, data-dependent method that measures the decrease in the model's performance when the features are permuted.
+The PFI can be calculated using different metrics such as the mean squared error (MSE), the mean absolute error (MAE), or the coefficient of determination ($R^2$).
+PFI also has limitations, as it is sensitive to over- and underfitting\cite{molnar2020limitations}, in which case the FI differs on training and test data, so the use of both datasets can be beneficial.
+In addition, another flaw of the PFI method is that it can generate cases in which the model does not have training data\cite{Molnar_2020_pitfalls,giles_hooker_unrestricted_2021},
+but other methods were proposed to overcome this\cite{ian_covert_understanding_2020, kristin_blesch_conditional_2023}.
+% todo include conditional PFI
+
+SHAP(SHapley Additive exPlanation)\cite{scott_lundberg_unified_2017} values contribute local explanation for individual predictions, but aggregates of it are useful to assess the importance of global features.
+For example, the mean absolute SHAP values quantify the importance of the feature regardless of the direction of the impact on the prediction.
+There are different algorithms for approximation from which Kernel SHAP\cite{scott_lundberg_unified_2017} is one that is model-agnostic.
+TShap \cite{vikas_c_raykar_tsshap_2023} is a method for estimating SHAP values for time series data, but it uses a surrogate model, so it gives the FI of the surrogate.
+Another related method is SAGE \emph{(Shapley additive global importance)} \cite{ian_covert_understanding_2020}, which estimates the contribution of each feature to the model's performance.
+
+Tree specific GFI methods are gain-based importance values which were already introduced with decision trees \cite{gordon_classification_1984}
+It measures of the reduction in mean average error(MAE) made by the decisions based on the respective feature.
+Another measure is the split-based importance\cite{tianqi_chen_xgboost_2016} refers to the number of decisions made by the model based on a feature.
+The previously presented SHAP also has a tree model-specific solution for approximation, called TreeSHAP \cite{scott_lundberg_local_2020}
+
+
+
 
 \section{Explainable AI in Forecasting}
 \label{sec:explainable_ai_in_forecasting}
+
+\subsection{Explainability in forecasting}\label{subsec:explainability-in-forecasting}
+The number of publications on forecasting explainability is limited.
+\cite{fahse2022explanation} tackled the presentation of explanations for sales forecasting models, but not the explanation methods themselves.
+\cite{Saluja_2021} used SHAP values to explain the prediction of a time series model but on local level and not global level.
+Skforecast~cite{joachim2023demand} library extracts model specific global feature importance from tree ensemble models.
+The work is focused on either global feature importance or local feature contribution without considering the multi-series and hierarchical structure of the data.
+
+\subsection{Feature importance as a basis for model reasoning}\label{subsec:feature-importance-as-basis-for-model-reasoning}
+Feature importance methods can provide insight into the model's decision-making process and help to understand the underlying rules and reasoning behind the predictions.
+By including demand drivers as features in the model, the feature importance methods can help to identify the key drivers of demand.
+For external factors such as weather, holidays, and economic indicators, the importance of the characteristics can help to understand their impact on demand.
+Through internal factors like price, promotions, the feature importance can help to understand post-promotion effects and the impact of price changes on the demand\cite{vandeput2023demand}.
+Knowing the influence of internal factors can help to optimize pricing strategies and promotional activities.
+However, causation and correlation are different concepts, and the feature importance methods can only provide correlation;
+therefore, the identified key features should be further analyzed to understand the causation\cite{Breiman2001}
+
+
+
 
 
 \section{Conclusions}
