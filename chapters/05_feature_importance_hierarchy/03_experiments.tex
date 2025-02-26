@@ -2,7 +2,7 @@
 \section{Experiments on hierarchical and grouped data}
 \label{sec:experiments_on_hierarchical_and_grouped_data}
 
-Our  research design\ref{fig:research_design} includes the following steps:
+Our research design\ref{fig:research_design} includes the following steps:
 \begin{itemize}
     \item Data collection: identify datasets with hierarchical and grouped time series data describing sales/demand for multiple product categories and regions with exogenous variables.
     \item Tool evaluation: assess the applicability of existing libraries for hierarchical forecasting and XAI techniques.
@@ -14,7 +14,7 @@ Our  research design\ref{fig:research_design} includes the following steps:
 \input{chapters/05_feature_importance_hierarchy/02_1_research_design_tikz}
 
 
-\subsection{Datasets}
+\subsection{Dataset}
 To model the hierarchical impact of features on forecasting, we must use datasets with multiple series and exogenous variables that represent demand drivers.
 There are multiple open sales data sets available; however, there are just a few, such as the M5 competition~\citep{makridakis_m5_2022} and the Kaggle datasets~\citep{favorita-sales} that include exogenous variables.
 For our initial exploration, we sampled M5 competition~\citep{makridakis_m5_2022} dataset, which includes sales data for multiple product categories and regions.
@@ -25,7 +25,6 @@ The reason for this filtering is to reduce the complexity of the model and to fo
 The selected products are FOODS\_3\_586, FOODS\_3\_080, and FOODS\_3\_555 and are sold in three states of Texas (TX), Wisconsin (WI).
 The total sales data for these products are shown in Figure~\ref{fig:product_sales}.
 Our hierarchical structure is shown in Figure~\ref{fig:hierarchical_structure}.
-%It should be mentioned that the hierarchical structure can be inverted, meaning that the products can be at the top level and the stores at the bottom level, so technically our data set is grouped time series data.
 
 
 \begin{figure}
@@ -119,6 +118,4 @@ The feature input for the final model is a table with the following columns:
     \item lag\_\emph{n} for n in [1, 4, 5, 13, 52] representing the sales from the previous weeks
     \item series\_id noted as (\_level\_skforecast) encoded as a numerical value representing the series hierarchy
 \end{itemize}
-%\emph{Series\_id} could have been encoded as a one-hot encoded vector or as a categorical variable given it is supported by LightGBM.
-%One-hot encoded vector would have increased the number of features and the complexity of the model,
-%while with the categorical variable, the model would have been able to learn the hierarchy structure.
+

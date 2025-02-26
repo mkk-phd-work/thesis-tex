@@ -35,19 +35,19 @@ Our initial research design\ref{fig:research_design} includes the following step
 %\end{itemize}
 
 \subsection{Data collection and preprocessing}\label{subsec:data-collection-and-preprocessing}
-
-To model the hierarchical impact of features on forecasting, we must use datasets with multiple series and exogenous variables that represent demand drivers.
-There are multiple open sales data sets available; however, there are just a few, such as the M5 competition\citep{makridakis_m5_2022} and the Kaggle datasets\cite{favorita-sales}.
-For our initial exploration, we sampled M5 competition\citep{makridakis_m5_2022} dataset, which includes sales data for multiple product categories and regions.
-The dataset contains daily sales information for 3049 products in 10 stores over 5 years.
-For our analysis, we identified three products that have similar sales patterns and are sold in two states and five stores.
-As products are from the same category and department, the hierarchy at the product level was not considered.
-The reason for this filtering is to reduce the complexity of the model and to focus on the feature importance analysis.
-The selected products are FOODS\_3\_586, FOODS\_3\_080, and FOODS\_3\_555 and are sold in three states of Texas (TX), Wisconsin (WI).
-The total sales data for these products are shown in Figure \ref{fig:product_sales}.
-Our hierarchical structure is shown in Figure \ref{fig:hierarchical_structure}.
-It should be mentioned that the hierarchical structure can be inverted, meaning that the products can be at the top level and the stores at the bottom level,
-so technically our data set is grouped time series data.
+%
+%To model the hierarchical impact of features on forecasting, we must use datasets with multiple series and exogenous variables that represent demand drivers.
+%There are multiple open sales data sets available; however, there are just a few, such as the M5 competition\citep{makridakis_m5_2022} and the Kaggle datasets\cite{favorita-sales}.
+%For our initial exploration, we sampled M5 competition\citep{makridakis_m5_2022} dataset, which includes sales data for multiple product categories and regions.
+%The dataset contains daily sales information for 3049 products in 10 stores over 5 years.
+%For our analysis, we identified three products that have similar sales patterns and are sold in two states and five stores.
+%As products are from the same category and department, the hierarchy at the product level was not considered.
+%The reason for this filtering is to reduce the complexity of the model and to focus on the feature importance analysis.
+%The selected products are FOODS\_3\_586, FOODS\_3\_080, and FOODS\_3\_555 and are sold in three states of Texas (TX), Wisconsin (WI).
+%The total sales data for these products are shown in Figure \ref{fig:product_sales}.
+%Our hierarchical structure is shown in Figure \ref{fig:hierarchical_structure}.
+%It should be mentioned that the hierarchical structure can be inverted, meaning that the products can be at the top level and the stores at the bottom level,
+%so technically our data set is grouped time series data.
 
 \begin{figure}
     \centering
@@ -174,82 +174,82 @@ The structure of the data sales data is shown in Table \ref{tab:data_structure} 
     \label{tab:exog_data_structure}
 \end{table}
 
-\subsection{Model implementation}\label{subsec:model-implementation}
-The modelling approach is to build a single global on all series and exogenous variables for bottom-up aggregation.
-For creating forecast models, the skforecast\cite{skforecast} library was used.
-The base model for hierarchical forecasting was LightGBM~\cite{guolin_ke_highly_2017}
- due to its efficiency and also because of its widespread usage in the M5 competition in this data set\cite{makridakis_m5_2022}.
-Other ensemble models such as Random Forest or Gradient Boosting Machines could be used as well.
-Other reasons for choosing LightGBM are that it can handle categorical variables without the need for one-hot encoding, and that it supports model-specific split and gain-based global feature importance methods.
-
-Hyperparameter tuning was performed using the Optuna library\cite{optuna_2019}, by Bayesian optimisation.
-The search space\ref{tab:hyperparam_search_space} was defined for the parameters of the LightGBM model, including the number of predictors, the minimum number of samples in the leaf, and the maximum depth of the tree.
-In addition, the number of lagged sales records used as features was included in the search space.
-For the search, the data was split into training and validation sets, the last year being the validation set used for backtesting.
-The performance of the model was evaluated as a mean square error (MSE) in the validation set for each configuration.
-The best configuration found was with 239 estimators and a maximum depth of 26 with a backtesting MSE 4263.01
-The lagged sales records used as features were 1, 4, 5, 13, and 52 weeks.
-\begin{table}
-    \centering
-    \begin{tabular}{|l|l|l|}
-        \hline
-        Parameter          & Search space & Description                                             \\
-        \hline
-        n\_estimators      & 50-1000      & Number of boosting iterations                           \\
-        max\_depth         & 5-50         & Maximum depth of the tree                               \\
-        min\_samples\_leaf & 1-10         & Minimum number of samples required to be at a leaf node \\
-        num\_lagged\_sales & 4-52         & Number of lagged sales records used as features         \\
-        \hline
-    \end{tabular}
-    \caption{Model hyperparameters search space}
-    \label{tab:hyperparam_search_space}
-\end{table}
-
-The feature input for the final model is a table with the following columns:
-\begin{itemize}
-    \item week\_of\_year represented as numerical values (1-52)
-    \item sell\_price for the week for the product in the store
-    \item num\_of\_events for the week
-    \item snap\_days for the week in the state
-    \item lag\_\emph{n} for n in [1, 4, 5, 13, 52] representing the sales from the previous weeks
-    \item series\_id noted as (\_level\_skforecast) encoded as a numerical value representing the series hierarchy
-\end{itemize}
-\emph{Series\_id} could have been encoded as a one-hot encoded vector or as a categorical variable given it is supported by LightGBM.
-One-hot encoded vector would have increased the number of features and the complexity of the model,
-while with the categorical variable
+%\subsection{Model implementation}\label{subsec:model-implementation}
+%The modelling approach is to build a single global on all series and exogenous variables for bottom-up aggregation.
+%For creating forecast models, the skforecast\cite{skforecast} library was used.
+%The base model for hierarchical forecasting was LightGBM~\cite{guolin_ke_highly_2017}
+% due to its efficiency and also because of its widespread usage in the M5 competition in this data set\cite{makridakis_m5_2022}.
+%Other ensemble models such as Random Forest or Gradient Boosting Machines could be used as well.
+%Other reasons for choosing LightGBM are that it can handle categorical variables without the need for one-hot encoding, and that it supports model-specific split and gain-based global feature importance methods.
+%
+%Hyperparameter tuning was performed using the Optuna library\cite{optuna_2019}, by Bayesian optimisation.
+%The search space\ref{tab:hyperparam_search_space} was defined for the parameters of the LightGBM model, including the number of predictors, the minimum number of samples in the leaf, and the maximum depth of the tree.
+%In addition, the number of lagged sales records used as features was included in the search space.
+%For the search, the data was split into training and validation sets, the last year being the validation set used for backtesting.
+%The performance of the model was evaluated as a mean square error (MSE) in the validation set for each configuration.
+%The best configuration found was with 239 estimators and a maximum depth of 26 with a backtesting MSE 4263.01
+%The lagged sales records used as features were 1, 4, 5, 13, and 52 weeks.
+%\begin{table}
+%    \centering
+%    \begin{tabular}{|l|l|l|}
+%        \hline
+%        Parameter          & Search space & Description                                             \\
+%        \hline
+%        n\_estimators      & 50-1000      & Number of boosting iterations                           \\
+%        max\_depth         & 5-50         & Maximum depth of the tree                               \\
+%        min\_samples\_leaf & 1-10         & Minimum number of samples required to be at a leaf node \\
+%        num\_lagged\_sales & 4-52         & Number of lagged sales records used as features         \\
+%        \hline
+%    \end{tabular}
+%    \caption{Model hyperparameters search space}
+%    \label{tab:hyperparam_search_space}
+%\end{table}
+%
+%The feature input for the final model is a table with the following columns:
+%\begin{itemize}
+%    \item week\_of\_year represented as numerical values (1-52)
+%    \item sell\_price for the week for the product in the store
+%    \item num\_of\_events for the week
+%    \item snap\_days for the week in the state
+%    \item lag\_\emph{n} for n in [1, 4, 5, 13, 52] representing the sales from the previous weeks
+%    \item series\_id noted as (\_level\_skforecast) encoded as a numerical value representing the series hierarchy
+%\end{itemize}
+%\emph{Series\_id} could have been encoded as a one-hot encoded vector or as a categorical variable given it is supported by LightGBM.
+%One-hot encoded vector would have increased the number of features and the complexity of the model,
+%while with the categorical variable
 
 
 % Lags: [ 1  4  5 13 52]
 %  Parameters: {'n_estimators': 239, 'max_depth': 26}
 %%Backtesting metric: 4263.010292888604
 
-\subsection{Feature importance analysis and model reasoning}\label{subsec:feature-importance-analysis-and-model-reasoning}
-Two initial ideas were considered to analyse the importance of characteristics.
-The first involves using the mean SHAP values for cohorts representing different levels of the hierarchy, providing information on the contribution of features throughout the structure.
-The second approach is based on conditional permutation importance, which evaluates the importance of features while
-accounting for the hierarchical structure on the idea of subgroup-based permutation importance\cite{cond_pfi}.
-The first method was prioritised for implementation due to the availability of support in the SHAP library\cite{scott_lundberg_consistent_2018}.
-Given an instance $x$ for prediction, the SHAP value of the feature $i$ is $\phi_i(x)$
-Each $x$ is part of a cohort $C_k$ based on the series hierarchy $k$.
-The contribution value or importance of feature $i$ for a $C_{k}$ cohort is calculated as
-\begin{equation}
-    \phi_i(C_k) = \frac{1}{|C_k|} \sum_{x \in C_k} |{\phi_i(x)|}
-\end{equation}
-where $|C_k|$ is the cardinality of $C_k$ and $|{\phi_i(x)}|$ is the absolute SHAP value of feature, $i$ for instance $x$.
-%$\bar{\phi}_i(C)$.
-
-Steps for the feature importance analysis:
-\begin{itemize}
-    \item For each prediction instance $x$ and feature \(i\) calculate SHAP value $\phi_i(x)$.
-    \item Split the instances into cohorts according to the hierarchy levels.
-    \item Calculate the mean SHAP values for each cohort $C$
-    \item Visualize the mean SHAP values for $C$ and summary plots
-\end{itemize}
-
-The reasoning of the model is based on the analysis of the contributions of the features to the forecast.
-The aim is to identify the underlying rules and patterns that the model uses to make predictions.
-The SHAP values provide a way to understand the impact of the features on the forecast.
-The analysis can be done at different levels of the hierarchy, from the global model to the state and store levels.
+%\subsection{Feature importance analysis and model reasoning}\label{subsec:feature-importance-analysis-and-model-reasoning}
+%Two initial ideas were considered to analyse the importance of characteristics.
+%The first involves using the mean SHAP values for cohorts representing different levels of the hierarchy, providing information on the contribution of features throughout the structure.
+%The second approach is based on conditional permutation importance, which evaluates the importance of features while
+%accounting for the hierarchical structure on the idea of subgroup-based permutation importance\cite{cond_pfi}.
+%The first method was prioritised for implementation due to the availability of support in the SHAP library\cite{scott_lundberg_consistent_2018}.
+%Given an instance $x$ for prediction, the SHAP value of the feature $i$ is $\phi_i(x)$
+%Each $x$ is part of a cohort $C_k$ based on the series hierarchy $k$.
+%The contribution value or importance of feature $i$ for a $C_{k}$ cohort is calculated as
+%\begin{equation}
+%    \phi_i(C_k) = \frac{1}{|C_k|} \sum_{x \in C_k} |{\phi_i(x)|}
+%\end{equation}
+%where $|C_k|$ is the cardinality of $C_k$ and $|{\phi_i(x)}|$ is the absolute SHAP value of feature, $i$ for instance $x$.
+%%$\bar{\phi}_i(C)$.
+%
+%Steps for the feature importance analysis:
+%\begin{itemize}
+%    \item For each prediction instance $x$ and feature \(i\) calculate SHAP value $\phi_i(x)$.
+%    \item Split the instances into cohorts according to the hierarchy levels.
+%    \item Calculate the mean SHAP values for each cohort $C$
+%    \item Visualize the mean SHAP values for $C$ and summary plots
+%\end{itemize}
+%
+%The reasoning of the model is based on the analysis of the contributions of the features to the forecast.
+%The aim is to identify the underlying rules and patterns that the model uses to make predictions.
+%The SHAP values provide a way to understand the impact of the features on the forecast.
+%The analysis can be done at different levels of the hierarchy, from the global model to the state and store levels.
 
 
 %\textcolor{red}{TODO: finish the description of the feature importance analysis}

@@ -4,7 +4,38 @@
 \label{sec:data_hierarchy_grouping}
 
 
-Similarly to the aggregation of the prediction in case of bottom up aggregation in hierarchical forecasting, the data can be grouped in a similar way. The data hierarchy can be defined
+Similarly to the aggregation of the prediction in case of bottom up aggregation in hierarchical forecasting, the data can be grouped in a similar way.
+
+
+
+%\subsection{Feature importance analysis and model reasoning}\label{subsec:feature-importance-analysis-and-model-reasoning}
+Two initial ideas were considered to analyse the importance of characteristics.
+The first involves using the mean SHAP values for cohorts representing different levels of the hierarchy, providing information on the contribution of features throughout the structure.
+The second approach is based on conditional permutation importance, which evaluates the importance of features while
+accounting for the hierarchical structure on the idea of subgroup-based permutation importance\cite{cond_pfi}.
+The first method was prioritised for implementation due to the availability of support in the SHAP library\cite{scott_lundberg_consistent_2018}.
+Given an instance $x$ for prediction, the SHAP value of the feature $i$ is $\phi_i(x)$
+Each $x$ is part of a cohort $C_k$ based on the series hierarchy $k$.
+The contribution value or importance of feature $i$ for a $C_{k}$ cohort is calculated as
+\begin{equation}
+    \phi_i(C_k) = \frac{1}{|C_k|} \sum_{x \in C_k} |{\phi_i(x)|}
+\end{equation}
+where $|C_k|$ is the cardinality of $C_k$ and $|{\phi_i(x)}|$ is the absolute SHAP value of feature, $i$ for instance $x$.
+%$\bar{\phi}_i(C)$.
+
+Steps for the feature importance analysis:
+\begin{itemize}
+    \item For each prediction instance $x$ and feature \(i\) calculate SHAP value $\phi_i(x)$.
+    \item Split the instances into cohorts according to the hierarchy levels.
+    \item Calculate the mean SHAP values for each cohort $C$
+    \item Visualize the mean SHAP values for $C$ and summary plots
+\end{itemize}
+
+%The reasoning of the model is based on the analysis of the contributions of the features to the forecast.
+The aim is to identify the underlying rules and patterns that the model uses to make predictions.
+The SHAP values provide a way to understand the impact of the features on the forecast.
+The analysis can be done at different levels of the hierarchy, from the global model to the state and store levels.
+
 
 
 
