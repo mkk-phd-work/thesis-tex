@@ -12,10 +12,10 @@
 %\node (stop) [startstop, below of=reasoning] {End};
 
 %\draw [arrow] (start) -- (data);
-\draw [arrow] (data) -- (tool);
-\draw [arrow] (tool) -- (model);
-\draw [arrow] (model) -- (importance);
-\draw [arrow] (importance) -- (reasoning);
+\draw [->] (data) -- (tool);
+\draw [->] (tool) -- (model);
+\draw [->] (model) -- (importance);
+\draw [->] (importance) -- (reasoning);
 %\draw [arrow] (reasoning) -- (stop);
 
 % Annotations

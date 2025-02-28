@@ -20,12 +20,25 @@
 \usepackage{pgf-pie}
 \usepackage{listings}
 \usepackage{pifont}
-\usetikzlibrary{shadows}
+
 \usepackage[hidelinks]{hyperref}
 \usepackage[acronym, section]{glossaries}
 \usepackage{natbib}
 
 \setcitestyle{numbers}
+
+%%% tikz
+\usetikzlibrary{shadows}
+\usetikzlibrary{shapes, arrows, positioning}
+\tikzstyle{line}=[draw]
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=gray!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!20]
+\tikzstyle{annotation} = [rectangle, text width=6cm, align=left, draw=black, fill=yellow!20, rounded corners, minimum height=2.5cm]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+%%%
+
+
 
 \usepackage{citeref}
 
