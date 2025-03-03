@@ -16,6 +16,9 @@
 \usepackage{booktabs}
 \usepackage{color}
 
+\usepackage[table]{xcolor}
+\usepackage{siunitx} %% for illegal unit error
+
 \usepackage{makecell}
 \usepackage{pgf-pie}
 \usepackage{listings}
@@ -24,6 +27,14 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage[acronym, section]{glossaries}
 \usepackage{natbib}
+
+%%%%
+\usepackage{subcaption} % for subfigures side by side
+\usepackage{longtable} % for 'pandas' output tables
+\usepackage{adjustbox} % for 'pandas' output tables fit to page width
+%\usepackage{booktabs}
+%\usepackage{multirow}
+%%%%
 
 \setcitestyle{numbers}
 
@@ -158,7 +169,7 @@
     \setstretch{1}
     \bibliographystyle{apalike}
 %    \bibliography{refs}
-    \bibliography{biblography/explain,biblography/hierarhical_importance,biblography/ml,biblography/xai} 
+    \bibliography{biblography/explain,biblography/hierarhical_importance,biblography/ml,biblography/xai, biblography/fi_challenges}
     \label{bib}
     %\bibliography{file1,file2}
 

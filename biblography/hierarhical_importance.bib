@@ -190,7 +190,7 @@
     url = {https://doi.org/10.1023/A:1010933404324}
 }
 
-@book{molnar2022,
+@book{Molnar2022,
     title = {Interpretable Machine Learning},
     author = {Christoph Molnar},
     year = {2022},
@@ -331,33 +331,9 @@ MAG ID: 3033797488
 }
 
 
-@article{guolin_ke_highly_2017,
-    title = {A {Highly} {Efficient} {Gradient} {Boosting} {Decision} {Tree}},
-    abstract = {Gradient Boosting Decision Tree (GBDT) is a popular machine learning algorithm, and has quite a few effective implementations such as XGBoost and pGBRT. Although many engineering optimizations have been adopted in these implementations, the efficiency and scalability are still unsatisfactory when the feature dimension is high and data size is large. A major reason is that for each feature, they need to scan all the data instances to estimate the information gain of all possible split points, which is very time consuming. To tackle this problem, we propose two novel techniques: {\textbackslash}emph\{Gradient-based One-Side Sampling\} (GOSS) and {\textbackslash}emph\{Exclusive Feature Bundling\} (EFB). With GOSS, we exclude a significant proportion of data instances with small gradients, and only use the rest to estimate the information gain. We prove that, since the data instances with larger gradients play a more important role in the computation of information gain, GOSS can obtain quite accurate estimation of the information gain with a much smaller data size. With EFB, we bundle mutually exclusive features (i.e., they rarely take nonzero values simultaneously), to reduce the number of features. We prove that finding the optimal bundling of exclusive features is NP-hard, but a greedy algorithm can achieve quite good approximation ratio (and thus can effectively reduce the number of features without hurting the accuracy of split point determination by much). We call our new GBDT implementation with GOSS and EFB {\textbackslash}emph\{LightGBM\}. Our experiments on multiple public datasets show that, LightGBM speeds up the training process of conventional GBDT by up to over 20 times while achieving almost the same accuracy.},
-    journal = {Neural Information Processing Systems},
-    author = {{Guolin Ke} and {Guolin Ke} and Ke, Guolin and {Qi Meng} and Meng, Qi and {Taifeng Wang} and Wang, Taifeng and Chen, Wei and {Wei Chen} and {Wei Chen} and {Wei Chen} and Chen, Wei and Chen, Wei and {Weidong Ma} and Ma, Weidong and {Tie-Yan Liu} and Liu, Tie-Yan},
-    month = jan,
-    year = {2017},
-    note = {MAG ID: 2753094203
-S2ID: 497e4b08279d69513e4d2313a7fd9a55dfb73273},
-    pages = {3108--3116},
-}
 
-@article{jerome_h_friedman_greedy_2001,
-    title = {Greedy function approximation: {A} gradient boosting machine.},
-    volume = {29},
-    doi = {10.1214/aos/1013203451},
-    abstract = {Function estimation/approximation is viewed from the perspective of numerical optimization in function space, rather than parameter space. A connection is made between stagewise additive expansions and steepest-descent minimization. A general gradient descent boosting paradigm is developed for additive expansions based on any fitting criterion. Specific algorithms are presented for least-squares, least absolute deviation, and Huber-M loss functions for regression, and multiclass logistic likelihood for classification. Special enhancements are derived for the particular case where the individual additive components are regression trees, and tools for interpreting such TreeBoost models are presented. Gradient boosting of regression trees produces competitive, highly robust, interpretable procedures for both regression and classification, especially appropriate for mining less than clean data. Connections between this approach and the boosting methods of Freund and Shapire and Friedman, Hastie and Tibshirani are discussed.},
-    number = {5},
-    journal = {Annals of Statistics},
-    author = {{Jerome H. Friedman} and Friedman, Jerome H. and {Jerome H. Friedman}},
-    month = oct,
-    year = {2001},
 
-    note = {MAG ID: 1678356000
-S2ID: 1679beddda3a183714d380e944fe6bf586c083cd},
-    pages = {1189--1232},
-}
+
 
 
 @article{giles_hooker_unrestricted_2021,

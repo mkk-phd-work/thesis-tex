@@ -1,0 +1,48 @@
+%\subsection[Model Training]{Model training and evaluation} \label{subsec:model_training}
+
+Forecasting ML models are similarly trained on training and test dataset however the split and cross-validation strategy is different for time series data.
+The cross-validation strategy has to be time aware, meaning the order of the data has to be preserved.
+The folds are generated to include the previous data points in the training set and the next points in the test set, also known as rolling forecasting origin cross-validation \cite{hyndman2018forecasting}.
+
+To assess the model performance, multiple mertrics were used, including the coefficient of determination ($R^2$), mean absolute error(MAE), and mean squared error (MSE).
+Several LightGBM and Random Forest models were trained on the generated datasets with and without scaling.
+To obtain predictive models with similar performance, the optuna library
+\footnote{Optuna: \url{https://optuna.org}} was used for parameter search with only the number of estimators as a hyperparameter.
+
+
+\begin{table}
+    \centering
+    \caption{Test results for LightGBM and Random Forest models on linear dataset}
+    \label{tab:training_results_linear}
+
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        Model         & Dataset    & Estimators & $R^2$  & MAE       \\
+        \hline
+        LightGBM      & Scaled     & 349        & 0.9775 & 15.058390 \\
+        LightGBM      & Non-Scaled & 415        & 0.9774 & 15.187829 \\
+        Random Forest & Scaled     & 1179       & 0.9789 & 14.504917 \\
+        Random Forest & Non-Scaled & 565        & 0.9791 & 14.450996 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}
+    \centering
+    \caption{Test results for LightGBM and Random Forest models on non-linear dataset}
+    \label{tab:training_results}
+
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        Model         & Dataset    & Estimators & $R^2$  & MAE      \\
+        \hline
+        LightGBM      & Scaled     & 349        & 0.9895 & 5.734598 \\
+        LightGBM      & Non-Scaled & 1026       & 0.9871 & 6.289761 \\
+        Random Forest & Scaled     & 897        & 0.9898 & 5.663916 \\
+        Random Forest & Non-Scaled & 225        & 0.9877 & 6.261677 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+The results of the model training are shown in Table~\ref{tab:training_results_linear} and Table~\ref{tab:training_results}.
+The difference between the performance of the models with and without scaling is not significant, but the number of estimators is different.

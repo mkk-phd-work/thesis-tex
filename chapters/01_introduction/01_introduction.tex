@@ -1,10 +1,18 @@
-
 %\chapter{Introduction}
 %\label{ch:introduction}
 
 %test
 Product demand forecasting is a common business problem in many industries.
 But especially in production planning, manufacturing, logistics, inventory management, retail, and marketing.
+
+% Research gap
+\begin{itemize}
+    \item The need for explainability and interpretability in black-box machine learning models used for forecasting: the need for trust in the system
+    \item The need for correct feature importance/attribution estimation in time series forecasting ML models: given that the data is sequential, the features are not independent, and the model is not a simple linear regression
+    \item The need for attribute importance in forecasting models predicting multiple and hierarchically related time series: the importance of a feature can vary depending on the context
+    \item The need for trustful and actionable insights for decision support in a collaborative development environment: the need for a system that can be used by domain experts while also feeding back insights to the data scientists
+\end{itemize}
+
 
 %Test citation~\cite{ketkar2017introduction}.
 
@@ -19,25 +27,25 @@ But especially in production planning, manufacturing, logistics, inventory manag
 
 The motivation of the thesis comes from the need to improve the explainability of machine learning forecasting models in order to raise trust in the system and deliver actionable insights for decision support.
 
+First we aim to understand the challenges in applying feature importance techniques to time series forecasting ML models and propose a methodology to address them.
+
+Second we aim to address the issue of feature importance in forecasting models predicting multiple time series and propose a methodology to group features hierarchically.
+
+Third we aim to propose a methodology to deliver trustful and actionable insights for decision support in a collaborative development environment.
+
 
 
 \section[Contributions]{Contributions}
 
 % list the contributions of the thesis
 \begin{itemize}
-    \item Contribution 1: Challenges in explainable AI for demand forecasting
-    \item Contribution 2: Hierarchical feature importance in demand forecasting
-    \item Contribution 3: Delivering actionable insights for decision support
+    \item Contribution 1: Addressing feature importance challenges in time series forecasting models
+    \item Contribution 2: Hierarchical feature importance in demand forecasting models
+    \item Contribution 3: Collaborative development for decision support in ML systems
 \end{itemize}
-
-
 
 
 % list of publications that are part of the thesis
 
 
-\section[Thesis Structure]{Thesis Structure}
-\textcolor{red}{TODO: describe the structure in the end}
-
-% describe the structure of the thesis
 

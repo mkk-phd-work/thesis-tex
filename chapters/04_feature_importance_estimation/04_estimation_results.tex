@@ -1,0 +1,125 @@
+\subsubsection{Feature Importance Metrics Comparison} \label{subsec:feature_importance_metrics_comparison}
+
+For the evaluation the above mentioned feature importance methods were used.
+In addition, for some of the methods in which a dataset was expected for calculation, both the train and the test datasets were used separately.
+To evaluate the similarity of the feature importance values, the Spearman correlation coefficient was used.
+Given the high number of experiments, the results for the LightGBM model are included in Fig.~\ref{fig:lgbm_correlation} for the linear dataset.
+With standardization, the consistency of importance values can be enhanced across the different estimation methods,
+as demonstrated in Subfig.~\ref{fig:lgbm_scaled_correlation}, while the correlation plot on Subfig.~\ref{fig:lgbm_nonscaled_correlation} for the model trained on non-standardized dataset emphasizes that without standardization tree specific importance values are less or not correlated with the other methods.
+In both cases \emph{TREE\_SPLIT} importance is highlighted as the least correlated, the reason being that the model prefers splits on the continuous variables, as shown in Table~\ref{tab:lin_relative_importance}.
+The main reason can be observed in Table~\ref{tab:lin_relative_importance}, where the relative importance values show that the model splits heavily on continuous variables, compared to the rest of features, even thogh the third and fourth lags have low average contribution by SHAP values and low PFI.
+
+The PFI and SHAP values are more similar, only minor differences are present due to the usage of the test or train dataset in calculation.
+Table \ref{tab:lin_relative_importance} illustrates the relative importance of the features for the linear dataset, allowing for a clearer comprehension.
+
+% Correlation of results on LGBM
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{chapters/04_feature_importance_estimation/img/standardization/lin/lgbm_scaled/feature_importance_correlation}
+        \caption{ With standardization}
+        \label{fig:lgbm_scaled_correlation}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{chapters/04_feature_importance_estimation/img/standardization/lin/lgbm_nonscaled/feature_importance_correlation}
+        \caption{Without standardization}
+        \label{fig:lgbm_nonscaled_correlation}
+    \end{subfigure}
+    \caption{Correlation of feature importance values for LightGBM model}
+    \label{fig:lgbm_correlation}
+\end{figure}
+
+
+
+
+
+
+\input{chapters/04_feature_importance_estimation/tables/edited/lin_relative_importance}
+
+%\color{red}
+%Todo: compare the feature importance metrics:
+%%- Include correlation plot for the feature importances
+%- Discuss and include the violin plots as means to show the distribution of the importance values
+%- Tree path perturbationn SHAP - value difference to interventional - Create table with limited results
+%%- include all results in appendix just for discussion
+%\color{black}
+
+\subsubsection{Feature scaling effect on importance measures} \label{subsec:feature_scaling_effect}
+Feature scaling affects the models this way, the importance values are shifted to other features as show in~\ref{tab:lin_relative_importance}.
+Without standardization, the models rely heavily on the `\_level` feature, which is the identifier of the time series,
+but the `TREE_SPLIT` values are low signaling that only a few splits are made to differentiate the series causing low generalization.
+
+The violin plots of SHAP values for a single series, shown in Figure~\ref{fig:sc_nsc_lgbm_s1} for the LightGBM model and Figure~\ref{fig:sc_nsc_rf_s1} for the Random Forest model, illustrate how feature importance values differ between standardized and non-standardized datasets.
+Without scaling the `_level` values have much larger magnitude, even dominating as in case of the Random Forest model for the series 3 in Figure~\ref{fig:fig:sc_nsc_rf_lgbm_s3}.
+With the standardized input features, the importance values are more evenly distributed, with weather and holiday effect having a higher importance above the `lag_3` and `lag_4` which should have low direct impact on the target.
+However, the scaling also has a disadvantage that the importance values are not as intuitive,
+as the values are not on the same scale as the original sales volumes.
+SHAP values representing the change in prediction value in the original feature space, can be important for a decision maker, as they could provide the potential growth or decrease in sales volume.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{chapters/04_feature_importance_estimation/img/standardization/lin/lgbm_scaled/shap_violin_s_1}
+        \caption{Standardized}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{chapters/04_feature_importance_estimation/img/standardization/lin/lgbm_nonscaled/shap_violin_s_1}
+        \caption{Non-standardized}
+    \end{subfigure}
+    \caption{Feature importance values for LightGBM model for series 1}\label{fig:sc_nsc_lgbm_s1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{chapters/04_feature_importance_estimation/img/standardization/lin/rf_forecaster_scaled/shap_violin_s_1}
+        \caption{Standardized}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{chapters/04_feature_importance_estimation/img/standardization/lin/rf_forecaster_nonscaled/shap_violin_s_1}
+        \caption{Non-standardized}
+    \end{subfigure}
+    \caption{Feature importance values for Random Forest model for series 1}\label{fig:sc_nsc_rf_s1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{chapters/04_feature_importance_estimation/img/standardization/lin/rf_forecaster_nonscaled/shap_violin_s_3}
+        \caption{Random forest}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{chapters/04_feature_importance_estimation/img/standardization/lin/lgbm_nonscaled/shap_violin_s_3}
+        \caption{LightGBM}
+    \end{subfigure}
+    \caption{Feature importance values for Random Forest and LightGBM models without standardization for series 3}\label{fig:fig:sc_nsc_rf_lgbm_s3}
+\end{figure}
+
+\subsubsection{Correlation of features and extrapolation} \label{subsec:correlation_of_features_and_importance}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\textwidth]{chapters/04_feature_importance_estimation/img/standardization/lin/rf_forecaster_scaled_grouped_permutation_importance}
+    \caption{Grouped permutation feature importance Random Forest model with standardization}
+    \label{fig:rf_grouped_permutation_importance}
+\end{figure}
+
+\input{chapters/04_feature_importance_estimation/tables/edited/lin_grouped_relative}
+
+\input{chapters/04_feature_importance_estimation/tables/edited/nonlin_grouped_relative}
+
+
+In Fig.~\ref{fig:rf_grouped_permutation_importance} the grouped PFI by the coefficient of determination for the Random Forest model with standardisation is shown.
+As expected, the importance of the grouped lag variables is the highest,followed by the exogenous variables.
+The relative importances are shown in Table~\ref{tab:lin_grouped_relative} for linear and Table~\ref{tab:nonlin_grouped_relative} for non-linear datasets.
+In the case of the linear dataset by scaling, the importance of the lag values are reduced, but the relative importance for the two models is similar.
+The value of approximately 0.6 for the lag variable makes sense, as the `lag\_1` contributed 0.6 to the target in data generation
+and the `lag\_2` variable has its contribution reduced by the `lag\_1` variable.
+
+The results of the non-linear dataset in Table~\ref{tab:nonlin_grouped_relative}, the importance of lag variables is the highest showing that the model relies almost solely on the lagged values to make predictions, highlighting the fact of the importance of data scaling.

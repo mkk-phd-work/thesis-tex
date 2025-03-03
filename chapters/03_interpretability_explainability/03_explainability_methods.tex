@@ -1,27 +1,27 @@
 
 
 %\subsection{Triad of model interpretability}
-%The triad of model interpretability consists of model transparency, model trust, and model understanding\cite{molnar2022}.
+%The triad of model interpretability consists of model transparency, model trust, and model understanding\cite{Molnar2022}.
 
 
 
-\section{Local explainability}
-\label{sec:local_explainability}
-
-
-\section{Cohort explainability}
-\label{sec:cohort_explainability}
-
-
-\section{Global explainability}
-\label{sec:global_explainability}
+%\section{Local explainability}
+%\label{sec:local_explainability}
+%
+%
+%\section{Cohort explainability}
+%\label{sec:cohort_explainability}
+%
+%
+%\subsection{Global explainability}
+%\label{sec:global_explainability}
 
 \subsection{Feature importance} \label{subsec:feature-importance-in-tree-ensemble-models}
-Feature importance (FI) or feature attribution is considered an interpretation method resulting in a summary statistic that assigns a score to each input feature \cite{molnar2022}.
-Depending on their scope, the FI methods can be global or local \cite{Guidotti2018,molnar2022}.
-The global feature importance (GFI) or model feature attribution methods explain the contribution of features to overall predictions, while the local FI quantifies feature contributions to specific predictions \cite{molnar2022}.
+Feature importance (FI) or feature attribution is considered an interpretation method resulting in a summary statistic that assigns a score to each input feature \cite{Molnar2022}.
+Depending on their scope, the FI methods can be global or local \cite{Guidotti2018,Molnar2022}.
+The global feature importance (GFI) or model feature attribution methods explain the contribution of features to overall predictions, while the local FI quantifies feature contributions to specific predictions \cite{Molnar2022}.
 Although related, GFI methods differ from feature selection, which identifies irrelevant features before training.
-GFI methods can be model-specific, which are limited to specific model types, while model-agnostic ones are applicable independent of the model type\cite{molnar2022}.
+GFI methods can be model-specific, which are limited to specific model types, while model-agnostic ones are applicable independent of the model type\cite{Molnar2022}.
 Another categorisation of FI methods is given by how it is calculated, in which case the importance can be based on the model's structure, while the other approach relies on a dataset.
 
 Among the model-agnostic methods, one of the most common is permutation feature importance (PFI) which was proposed to measure FI in random forests\cite{Breiman2001}.
@@ -43,17 +43,27 @@ It measures of the reduction in mean average error(MAE) made by the decisions ba
 Another measure is the split-based importance\cite{tianqi_chen_xgboost_2016} refers to the number of decisions made by the model based on a feature.
 The previously presented SHAP also has a tree model-specific solution for approximation, called TreeSHAP \cite{scott_lundberg_local_2020}
 
+\subsection{Global feature importance}
+
+We denote any machine learning model $f$ that predicts the target variable $y$ based on the input features $x = [x^1, x^2, ..., x^n]$.
+GFI of $f$ is a measure of importance attributed to each $X=[X^1, X^2, ..., X^n]$ feature in overall.
+noted as $ \phi( f, X) = [ \phi( f, X^1), \phi( f, X^2), ..., \phi( f, X^n)]$.
+The model $f$ is trained on the training set $D_{\text{train}}$ and evaluated on the test set $D_{\text{test}}$.
+
+For example, PFI measures the importance of a feature by shuffling the values of the feature and observing the change in the model's performance:
+$\phi(f, X_i)_{PFI} = L(f, D_{\text{test}}) - L(f, D_{\text{test}}^{X_i})$,
+where $D_{\text{test}}^{X_i}$ is the test set with the values of the feature $X_i$ shuffled, and $L$ is the loss function used to train the model.
+If MSE is used as the loss function, PFI is $\phi(f, X_i) = MSE(f, D_{\text{test}}) - MSE(f, D_{\text{test}}^{X_i})$.
+
+To make the importance values comparable, we introduce the concept of relative importance, which is the ratio of the importance of a feature to the sum of all feature importances.
+The relative importance of a feature $X_i$ is calculated as:
+$$
+\text{RI}(f, X_i) = \frac{\phi(f, X_i)}{\sum_{j=1}^{n} \phi(f, X_j)}
+$$
+Also the rank of the feature importance can be calculated as the order of the feature importance values.
 
 
-\section{Explainable AI in Forecasting}
-\label{sec:explainable_ai_in_forecasting}
 
-\subsection{Explainability in forecasting}\label{subsec:explainability-in-forecasting}
-The number of publications on forecasting explainability is limited.
-\cite{fahse2022explanation} tackled the presentation of explanations for sales forecasting models, but not the explanation methods themselves.
-\cite{Saluja_2021} used SHAP values to explain the prediction of a time series model but on local level and not global level.
-Skforecast~cite{joachim2023demand} library extracts model specific global feature importance from tree ensemble models.
-The work is focused on either global feature importance or local feature contribution without considering the multi-series and hierarchical structure of the data.
 
 \subsection{Feature importance as a basis for model reasoning}\label{subsec:feature-importance-as-basis-for-model-reasoning}
 Feature importance methods can provide insight into the model's decision-making process and help to understand the underlying rules and reasoning behind the predictions.
@@ -68,5 +78,3 @@ therefore, the identified key features should be further analyzed to understand 
 
 
 
-\section{Conclusions}
-\label{sec:interpretability_explainability_conclusions}

@@ -22,8 +22,15 @@ Forecasting techniques can be divided into single-series or multi-series forecas
 Single-series forecasting refers to the prediction of a single time series, while multiseries forecasting involves the prediction of multiple time series, with the same global model\cite{joachim2023demand}.
 These series can be related to each other, such as sales of different products, or they can be independent, such as sales in different regions; therefore, it is important to consider the hierarchical structure of the data.
 
+\subsubsection{Multi-series forecasting}
+Multi-series modeling or global forecasting models are used to learn a single predictive model from multiple time series \cite{januschowski2020criteria}
+This approach is beneficial when multiple time series share common patterns, which can be used to improve the generalization of models~\cite{Buonanno2022}.
+In demand forecasting, this is especially relevant when different products or point of sale exhibit similar seasonal trends or promotional effects.
+Other benefits include the easier evaluation of the model that has to be done on a single model and the easier maintenance.
 
 
+
+%
 %Hierarchical forecasting
 
 Hierarchical forecasting refers to the prediction of multiple time series that are related to each other in a hierarchical structure\cite{hyndman2018forecasting}.
@@ -39,7 +46,7 @@ Time hierarchy refers to the temporal structure of the data, such as year, month
 
 
 
-\section{Multi-step Forecasting}
+\subsection{Multi-step Forecasting}
 \label{sec:multi_step_forecasting}
 %\input{chapters/02_demand_forecasting/multi_step_forecasting}
 \begin{itemize}

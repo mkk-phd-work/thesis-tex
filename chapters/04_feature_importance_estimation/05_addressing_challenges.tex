@@ -1,0 +1,30 @@
+For practitioners, it is important to understand the implications of these methods when interpreting the results.
+In case of feature scaling, by not applying scaling to the features, the importance values might seem more intuitive.
+But the consequence of this is that the importance of features might be shifted to other features, as in our case, the identifier of the time series.
+
+If using permutation importance, it is important to have in mind that correlated features can unexpected results.
+We recommend using grouped importance to get a value closer to the real importance values while also partially addressing extrapolation issues.
+
+SHAP values can be really useful, especially without scaling as they provide not only importance but also the contribution of feature to prediction.
+It remains to be evaluated whether applying the inverse transformations on the scaled SHAP results can provide better results.
+Tree SHAP with perturbation method based on the fitted tree can result in a faster result, which can be useful in the case of large datasets while also addressing some concerns with regard to extrapolation.
+Using the perturbation method on Tree SHAP applied to the trained tree can lead to faster outcomes, which is advantageous for large data sets, while also mitigating some extrapolation issues.
+Examining the values at the series level may provide further insights into the directional contributions of the features.
+Given the complexity of the problem, we recommend using multiple methods to better understand the model and features.
+
+%Acknowledge limitations and areas needing further study.
+The data generation process does not address all real-world complexities.
+As a first step, we only considered independent time series, but in other demand forecasting scenarios the sales of one product might influence the sales of another product.
+
+With regard to the application of SHAP values, there are some limitations.
+Although some methods like LightGBM can handle categorical features, SHAP libraries do not support them.
+Scaling the features also might result in spurious errors due to the precision of the floating point numbers.
+Split- and gain-based importance for trees might be easy to calculate, but they are not always the best choice for evaluating feature importance.
+For causal analysis, feature importance methods are not enough, but they can provide a good starting point.
+
+
+%Clearly articulate the unique contributions and insights that your study offers.
+Our study demonstrates the use of post-hoc feature importance methods in multi-series forecasting.
+It was shown that the choice of the feature importance method can have a significant impact on the results.
+In addition to this, it was also presented that not only squashing transformations can result in different importance results, but linear transformations can affect the outcome due to the different model behavior.
+Last but not least some of the caveats of the calculation of feature importance values was also discussed and addressed.

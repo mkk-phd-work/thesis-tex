@@ -1,0 +1,31 @@
+
+%\subsection{Addressing feature importance challenges} \label{subsec:feature-importance-challenges}
+
+As presented in the previous section, multiple challenges can arise when calculating feature importance metrics, when working with time series data and tree-based models.
+
+\subsubsection{Feature scaling effect}
+Feature scaling is a common preprocessing step in machine learning to normalize the data.
+It is beneficial for models that are sensitive to sparse data or have different scales for the features.
+In the case of squashing transformations like log or square root, the feature importance values are also affected~\cite{shapDocumentation}.
+Linear transformations like normalization or standardization are used to scale the features to a common range.
+Fortunately, tree-based models are invariant to feature scaling, but scaling the features could be computationally beneficial. \color{red}TODO: add references \color{black}
+On the downside, by applying feature scaling the global (mean average) SHAP values will be scaled as well.
+To address this issue, we propose to apply the feature scaling on the data and compare the results with unscaled data.
+
+\subsubsection{Feature correlations}
+Kernel SHAP values assume that features are independent, which is not the case, especially in time series prediction models.
+Tree SHAP, however, can give more accurate results as the method considers joint feature distributions preserving dependencies \cite{Molnar2022}.
+Another approach that can be used to address the issue of correlated features is to cluster or group them.
+The work \cite{Plagwitz2022} introduces a grouped version of permutation importance, where the is to group the correlated features together and then permute the group of features.
+This grouping can be achieved through clustering; however, in case of time series, lag features may show strong autocorrelation.
+Grouping them together is logical while the external demand drivers can be used as separate features.
+This way it can be measured the amount of the importance is attributed to the lagged variables and how much to the external demand drivers.
+
+\subsubsection{Extrapolation}
+TreeSHAP can be used also to address the issue of extrapolation.
+Tree-path-dependent feature perturbation can be used as a solution, given that to calculate the SHAP values, there is no need for additional data points for sampling, giving an explanation true to the trained model~\cite{CoRR2020}. %https://github.com/shap/shap/issues/1098
+This also makes it more computationally efficient too, compared to other Shapley methods that require data points to be sampled~\cite{Lundberg2020, Molnar2022}. %https://pmc.ncbi.nlm.nih.gov/articles/PMC7326367/
+
+%additionally conditional sampling is recommended to address the issue of extrapolation. \cite{molnar2022} but no implementation is provided in python
+
+

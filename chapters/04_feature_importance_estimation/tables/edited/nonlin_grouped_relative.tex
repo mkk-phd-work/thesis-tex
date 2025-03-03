@@ -1,0 +1,15 @@
+\begin{table}
+    \centering
+    \caption{Relative feature importance for grouped PFI for the non-linear combined dataset.} \label{tab:nonlin_grouped_relative}
+    \begin{tabular}{lrrrr}
+        \toprule
+        & lgbm\_scaled & lgbm\_nonscaled & rf\_scaled & rf\_nonscaled \\
+        \midrule
+        \_level\_skforecast    & 0.018005     & 0.029358        & 0.011419   & 0.010066      \\
+        day\_of\_year          & 0.198566     & 0.021532        & 0.070868   & 0.006378      \\
+        holiday\_trend\_factor & 0.029211     & 0.004774        & 0.016281   & 0.002154      \\
+        lag\_                  & 0.381743     & 0.868834        & 0.571649   & 0.918375      \\
+        weekend\_trend\_factor & 0.372476     & 0.075502        & 0.329783   & 0.063028      \\
+        \bottomrule
+    \end{tabular}
+\end{table}
